@@ -1,6 +1,9 @@
 {
   "name": "richardjlo",
   "version": "1.0.0",
+  "engines": {
+    "npm": "6.1.x"
+  },
   "description": "testing new tech",
   "main": "app.js",
   "scripts": {

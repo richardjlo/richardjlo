@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-// const path = __dirname + '/views/';
-
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
