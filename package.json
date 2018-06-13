@@ -8,7 +8,7 @@
   "description": "testing new tech",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "snyk test"
   },
   "author": "Richard Lo",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "bootstrap": "^4.1.1",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "helmet": "^3.12.1",
     "heroku": "^7.0.93",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3"
@@ -23,6 +24,7 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "snyk": "^1.82.2"
   }
 }
