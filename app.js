@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
+const helmet = require('helmet');
+
+app.use(helmet());
 
 app.set('view engine', 'ejs');
 
@@ -13,5 +16,4 @@ app.get('/project1', function(req, res) {
 });
 
 app.listen(PORT, function() {
-  console.log('Example  app listening on port 5000!');
 });
