@@ -10,4 +10,6 @@ app.get('/project1', function(req, res) {
   res.render('project1', {title: 'Project 1'});
 });
 
-app.listen(5000, () => console.log('Example app listening on port 5000!'));
+//  app.listen(5000, () => console.log('Example app listening on port 5000!'));
+
+app.listen(process.env.PORT || 5000);
