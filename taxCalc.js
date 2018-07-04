@@ -1,3 +1,33 @@
+module.exports.initTaxBrackets = function(originalFedTaxBrackets) {
+  let initializedTaxBrackets = [];
+  let taxRate;
+  let bracketMin;
+  let bracketMax;
+  let origTaxRate;
+  let origbracketMin;
+  let origibracketMax;
+
+  for (let i = 0; i < originalFedTaxBrackets.length; i++) {
+    origTaxRate = originalFedTaxBrackets[i][0];
+    origbracketMin = originalFedTaxBrackets[i][1];
+    origibracketMax = originalFedTaxBrackets[i][2];
+
+    // Keep tax rate same
+    taxRate = origTaxRate;
+
+    // Minus 1 from all minimum threshholds greater than 0.
+    // Convert dollars into cents by multiplying all threshholds by 100.
+    if (origbracketMin > 0) {
+      bracketMin = (origbracketMin - 1) * 100;
+    } else {
+      bracketMin = 0;
+    }
+
+    bracketMax = origibracketMax * 100;
+    initializedTaxBrackets.push([taxRate, bracketMin, bracketMax]);
+  }
+  return initializedTaxBrackets;
+};
 
 module.exports.calculateTax = function(federalTaxBrackets, taxableIncome) {
   let bracketIndex;

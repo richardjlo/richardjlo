@@ -5,20 +5,10 @@ const expect = Chai.expect;
 
 const taxCalc = require('../taxCalc.js');
 
-const taxBracket2017 = [
-  [.10, 0, 9325],
-  [.15, 9326, 37950],
-  [.25, 37951, 91900],
-  [.28, 91901, 191650],
-  [.33, 191651, 416700],
-  [.35, 416701, 418400],
-  [.396, 418401, 1000000000000],
-];
-
 // Normalizes bracket for usage in this program.
 // Minus 1 from all minimum threshholds greater than 0.
 // Convert dollars into cents by multiplying all threshholds by 100.
-const normalizedTaxBracket2017 = [
+const federalTaxBrackets = [
   [.10, 0, 932500],
   [.15, 932500, 3795000],
   [.25, 3795000, 9190000],
@@ -27,6 +17,38 @@ const normalizedTaxBracket2017 = [
   [.35, 41670000, 41840000],
   [.396, 41840000, 1000000000000],
 ];
+
+describe('#Initialize Federal Tax Brackets', function() {
+  const taxBracket2017 = [
+    [.10, 0, 9325],
+    [.15, 9326, 37950],
+    [.25, 37951, 91900],
+    [.28, 91901, 191650],
+    [.33, 191651, 416700],
+    [.35, 416701, 418400],
+    [.396, 418401, 1000000000000],
+  ];
+
+  let expectedSolution = [
+    [.10, 0, 932500],
+    [.15, 932500, 3795000],
+    [.25, 3795000, 9190000],
+    [.28, 9190000, 19165000],
+    [.33, 19165000, 41670000],
+    [.35, 41670000, 41840000],
+    [.396, 41840000, 100000000000000],
+  ];
+
+  it('initTaxBrackets function should exist', function() {
+    expect(taxCalc.initTaxBrackets(taxBracket2017)).to.not.be.undefined;
+  });
+
+  it('should initialize the a given federal tax brackets for this program',
+  function() {
+    expect(taxCalc.initTaxBrackets(taxBracket2017)).
+    to.deep.equal(expectedSolution);
+  });
+});
 
 describe('#Calculate effective tax rate', function() {
   it('taxCalc.js file should exist', function() {
@@ -39,19 +61,19 @@ describe('#Calculate effective tax rate', function() {
 
   it('should calculate effective tax rate based on ($19,000)', function() {
       // Check tax on $19,000. Should be $2,383.75
-      expect(taxCalc.calculateTax(normalizedTaxBracket2017,
+      expect(taxCalc.calculateTax(federalTaxBrackets,
         1900000)).to.equal(238375);
   });
 
   it('should calculate effective tax rate based on ($20,000)', function() {
       // Check tax on $20,000. Should be $2,533.75
-      expect(taxCalc.calculateTax(normalizedTaxBracket2017,
+      expect(taxCalc.calculateTax(federalTaxBrackets,
         2000000)).to.equal(253375);
   });
 
   it('should calculate effective tax rate based on ($80,000)', function() {
       // Check tax on $80,000. Should be $15,738.75
-      expect(taxCalc.calculateTax(normalizedTaxBracket2017,
+      expect(taxCalc.calculateTax(federalTaxBrackets,
         8000000)).to.equal(1573875);
   });
 });
@@ -64,17 +86,17 @@ describe('#Which tax bracket', function() {
 
   // Check tax bracket for $80,000. Should be 2.
   it('should return the tax bracket based on income ($80,000)', function() {
-    expect(taxCalc.whichBracket(normalizedTaxBracket2017, 8000000)).to.equal(2);
+    expect(taxCalc.whichBracket(federalTaxBrackets, 8000000)).to.equal(2);
   });
 
   // Check tax bracket for $19,000. Should be 1.
   it('should return the tax bracket based on income ($19,000)', function() {
-    expect(taxCalc.whichBracket(normalizedTaxBracket2017, 1900000)).to.equal(1);
+    expect(taxCalc.whichBracket(federalTaxBrackets, 1900000)).to.equal(1);
   });
 
   // Check tax bracket for $191,651. Should be 4.
   it('should return the tax bracket based on income ($191,651)', function() {
-    expect(taxCalc.whichBracket(normalizedTaxBracket2017,
+    expect(taxCalc.whichBracket(federalTaxBrackets,
       19165100)).to.equal(4);
   });
 });
