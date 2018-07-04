@@ -1,3 +1,36 @@
+module.exports.calculateTax = function(federalTaxBrackets, taxableIncome) {
+  let bracketIndex;
+  let bracket;
+  let bracketMax;
+  let tax = 0;
+  let taxAsPercentOfIncome;
+  let taxBracket;
+  let taxBracketPercentage;
+
+  bracketIndex = this.whichBracket(federalTaxBrackets, taxableIncome);
+  taxBracket = federalTaxBrackets[bracketIndex];
+
+  // Add full brackets to tax.
+  for (let i = 0; i < bracketIndex; i++) {
+    bracket = federalTaxBrackets[i];
+    bracketMax = bracket[2];
+    tax += this.calculateSingleBracket(bracket, bracketMax);
+  }
+
+  // Add partial bracket to tax.
+  tax += this.calculateSingleBracket(taxBracket, taxableIncome);
+
+  // Calculate tax as percentage of income
+  taxAsPercentOfIncome = Math.round((tax / taxableIncome) * 10000) / 10000;
+
+  // Calculate taxBracket
+  taxBracketPercentage = taxBracket[0];
+
+  // Returns tax in cents, taxAsPercentOfIncome and taxBracketPercentage
+  // in decimal format
+  return [tax, taxAsPercentOfIncome, taxBracketPercentage];
+};
+
 module.exports.initTaxBrackets = function(originalFedTaxBrackets) {
   let initializedTaxBrackets = [];
   let taxRate;
@@ -27,27 +60,6 @@ module.exports.initTaxBrackets = function(originalFedTaxBrackets) {
     initializedTaxBrackets.push([taxRate, bracketMin, bracketMax]);
   }
   return initializedTaxBrackets;
-};
-
-module.exports.calculateTax = function(federalTaxBrackets, taxableIncome) {
-  let bracketIndex;
-  let bracket;
-  let tax = 0;
-  let bracketMax;
-
-  bracketIndex = this.whichBracket(federalTaxBrackets, taxableIncome);
-
-  // Add full brackets to tax.
-  for (let i = 0; i < bracketIndex; i++) {
-    bracket = federalTaxBrackets[i];
-    bracketMax = bracket[2];
-    tax += this.calculateSingleBracket(bracket, bracketMax);
-  }
-
-  // Add partial bracket to tax.
-  tax += this.calculateSingleBracket(federalTaxBrackets[bracketIndex],
-    taxableIncome);
-  return tax;
 };
 
 module.exports.whichBracket = function(federalTaxBrackets, taxableIncome) {
