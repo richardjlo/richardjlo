@@ -11,8 +11,8 @@ app.get('/', function(req, res) {
   res.render('index', {title: 'Hello world'});
 });
 
-app.get('/project1', function(req, res) {
-  res.render('project1', {title: 'Project 1'});
+app.get('/tax-calculator', function(req, res) {
+  res.render('tax-calculator', {title: 'Tax Calculator'});
 });
 
 app.listen(PORT, function() {
