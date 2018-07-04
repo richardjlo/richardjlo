@@ -1,24 +1,33 @@
 
-module.exports.calculateTax = function(taxBracket, taxableIncome) {
-  let tax;
+module.exports.calculateTax = function(federalTaxBrackets, taxableIncome) {
+  let bracketIndex;
   let bracket;
-  let margTaxRate;
-  let minIncome;
-  let maxIncome;
+  let tax = 0;
+  let bracketMax;
 
-  bracket = self.whichBracket(taxBracket, taxableIncome);
+  bracketIndex = this.whichBracket(federalTaxBrackets, taxableIncome);
 
+  // Add full brackets to tax.
+  for (let i = 0; i < bracketIndex; i++) {
+    bracket = federalTaxBrackets[i];
+    bracketMax = bracket[2];
+    tax += this.calculateSingleBracket(bracket, bracketMax);
+  }
+
+  // Add partial bracket to tax.
+  tax += this.calculateSingleBracket(federalTaxBrackets[bracketIndex],
+    taxableIncome);
   return tax;
 };
 
-module.exports.whichBracket = function(taxBracket, taxableIncome) {
+module.exports.whichBracket = function(federalTaxBrackets, taxableIncome) {
   let bracket;
   let margTaxBracket;
   let bracketMin;
   let bracketMax;
 
-  for (let i = 0; i < taxBracket.length; i++) {
-    margTaxBracket = taxBracket[i];
+  for (let i = 0; i < federalTaxBrackets.length; i++) {
+    margTaxBracket = federalTaxBrackets[i];
     bracketMin = margTaxBracket[1];
     bracketMax = margTaxBracket[2];
     if (taxableIncome > bracketMin && taxableIncome <= bracketMax) {

@@ -33,18 +33,26 @@ describe('#Calculate effective tax rate', function() {
       expect(taxCalc).to.not.be.undefined;
   });
 
-  it('should calculate effective tax rate', function() {
-      let taxAmount;
-/*
+  it('calculateTax should exist', function() {
+    expect(taxCalc.calculateTax).to.not.be.undefined;
+  });
+
+  it('should calculate effective tax rate based on ($19,000)', function() {
       // Check tax on $19,000. Should be $2,383.75
-      //taxAmount = taxCalc.calculateTax(taxRates2017, 19000);
-      expect(taxCalc.calculateTax(taxRates2017, 19000)).to.equal(2383.75);
+      expect(taxCalc.calculateTax(normalizedTaxBracket2017,
+        1900000)).to.equal(238375);
+  });
 
+  it('should calculate effective tax rate based on ($20,000)', function() {
+      // Check tax on $20,000. Should be $2,533.75
+      expect(taxCalc.calculateTax(normalizedTaxBracket2017,
+        2000000)).to.equal(253375);
+  });
+
+  it('should calculate effective tax rate based on ($80,000)', function() {
       // Check tax on $80,000. Should be $15,738.75
-      //taxAmount = taxCalc.calculateTax(taxRates2017, 80000);
-      expect(taxCalc.calculateTax(taxRates2017, 80000)).to.equal(15738.75);
-
-*/
+      expect(taxCalc.calculateTax(normalizedTaxBracket2017,
+        8000000)).to.equal(1573875);
   });
 });
 
@@ -66,7 +74,8 @@ describe('#Which tax bracket', function() {
 
   // Check tax bracket for $191,651. Should be 4.
   it('should return the tax bracket based on income ($191,651)', function() {
-    expect(taxCalc.whichBracket(normalizedTaxBracket2017, 19165100)).to.equal(4);
+    expect(taxCalc.whichBracket(normalizedTaxBracket2017,
+      19165100)).to.equal(4);
   });
 });
 
