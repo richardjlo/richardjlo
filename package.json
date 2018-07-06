@@ -8,6 +8,7 @@
   "description": "testing new tech",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",   
     "test": "snyk test"
   },
   "author": "Richard Lo",
