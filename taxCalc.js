@@ -33,9 +33,11 @@ module.exports.calculateTax = function(taxableIncome) {
 
   // Calculate tax as percentage of income
   taxAsPercentOfIncome = Math.round((tax / taxableIncome) * 10000) / 10000;
+  taxAsPercentOfIncome = (taxAsPercentOfIncome * 100).toFixed(2);
 
-  // Calculate taxBracket
+  // Calculate taxBracket send as percentage.
   taxBracketPercentage = taxBracket[0];
+  taxBracketPercentage = (taxBracketPercentage * 100).toFixed(2);
 
   // Returns tax in cents, taxAsPercentOfIncome and taxBracketPercentage
   // in decimal format

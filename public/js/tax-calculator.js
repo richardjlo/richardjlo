@@ -16,13 +16,11 @@ $(document).ready(function() {
           // Add $ sign and commas.
           let taxStr = '$' + (response.tax).toLocaleString('en');
 
-          // Multiply by 100 to display in % form.
-          let taxAsPercentOfIncomeStr =
-            (response.taxAsPercentOfIncome * 100).toFixed(2) + '%';
+          // Add % to string
+          let taxAsPercentOfIncomeStr = response.taxAsPercentOfIncome + '%';
 
-          // Multiply by 100 to display in % form.
-          let taxBracketPercentageStr =
-            (response.taxBracketPercentage * 100).toFixed(2) + '%';
+          // Add % to string
+          let taxBracketPercentageStr = response.taxBracketPercentage + '%';
 
           $('#tax').html(taxStr);
           $('#taxAsPercentOfIncome').html(taxAsPercentOfIncomeStr);
