@@ -21,19 +21,11 @@ app.get('/tax-calculator', function(req, res) {
   res.render('tax-calculator', {title: 'Tax Calculator'});
 });
 
+const taxCalc = require('./taxCalc.js');
 app.post('/tax-calculator', function(req, res) {
-  console.log(req.body);
-
   let salary = req.body.salary;
-   console.log('salary is ' + salary);
-
-   res.send({
-     tax: 1573875,
-     taxAsPercentOfIncome: .1967,
-     taxBracketPercentage: .25,
-   });
-
-
+  let taxInfo = taxCalc.calculateTax(salary);
+  res.send(taxInfo);
 });
 
 app.listen(PORT, function() {

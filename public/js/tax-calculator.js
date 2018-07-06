@@ -13,9 +13,13 @@ $(document).ready(function() {
         url: 'tax-calculator',
         data: {salary: salaryAmount},
         success: function(response) {
-          //console.log(response.tax / 100);
-          let taxStr = '$' + response.tax / 100;
-          $('#tax').html(taxStr);
+          let tax = response.tax;
+          let taxAsPercentOfIncome = response.taxAsPercentOfIncome;
+          let taxBracketPercentage = response.taxBracketPercentage;
+
+          $('#tax').html('$' + tax);
+          $('#taxAsPercentOfIncome').html(taxAsPercentOfIncome + '%');
+          $('#taxBracketPercentage').html(taxBracketPercentage + '%');
         },
     });
   });
