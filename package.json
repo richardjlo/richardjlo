@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "engines": {
     "npm": "6.1.0",
-    "node": "10.4.0"
+    "node": "10.5.0"
   },
   "description": "testing new tech",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",   
+    "start": "node app.js",
     "test": "snyk test"
   },
   "author": "Richard Lo",
