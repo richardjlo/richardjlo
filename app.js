@@ -21,12 +21,12 @@ app.get('/tax-calculator', function(req, res) {
   res.render('tax-calculator', {title: 'Tax Calculator'});
 });
 
-const taxCalc = require('./taxCalc.js');
-app.post('/tax-calculator', function(req, res) {
-  let salary = req.body.salary;
-  let taxInfo = taxCalc.calculateTax(salary);
-  res.send(taxInfo);
-});
+// const taxCalc = require('./taxCalc.js');
+// app.post('/tax-calculator', function(req, res) {
+//   let salary = req.body.salary;
+//   let taxInfo = taxCalc.calculateTax(salary);
+//   res.send(taxInfo);
+// });
 
 app.listen(PORT, function() {
 });
