@@ -44,10 +44,10 @@ module.exports.calculateTax = function(taxableIncome) {
     tax: tax / 100,
 
     // Multiply by 100 to show result in percentage
-    taxAsPercentOfIncome: taxAsPercentOfIncome * 100,
+    taxAsPercentOfIncome: taxAsPercentOfIncome,
 
     // Multiply by 100 to show result in percentage
-    taxBracketPercentage: taxBracketPercentage * 100,
+    taxBracketPercentage: taxBracketPercentage,
   };
 };
 

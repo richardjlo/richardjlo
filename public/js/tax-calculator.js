@@ -13,13 +13,20 @@ $(document).ready(function() {
         url: 'tax-calculator',
         data: {salary: salaryAmount},
         success: function(response) {
-          let tax = response.tax;
-          let taxAsPercentOfIncome = response.taxAsPercentOfIncome;
-          let taxBracketPercentage = response.taxBracketPercentage;
+          // Add $ sign and commas.
+          let taxStr = '$' + (response.tax).toLocaleString('en');
 
-          $('#tax').html('$' + tax);
-          $('#taxAsPercentOfIncome').html(taxAsPercentOfIncome + '%');
-          $('#taxBracketPercentage').html(taxBracketPercentage + '%');
+          // Multiply by 100 to display in % form.
+          let taxAsPercentOfIncomeStr =
+            (response.taxAsPercentOfIncome * 100).toFixed(2) + '%';
+
+          // Multiply by 100 to display in % form.
+          let taxBracketPercentageStr =
+            (response.taxBracketPercentage * 100).toFixed(2) + '%';
+
+          $('#tax').html(taxStr);
+          $('#taxAsPercentOfIncome').html(taxAsPercentOfIncomeStr);
+          $('#taxBracketPercentage').html(taxBracketPercentageStr);
         },
     });
   });
