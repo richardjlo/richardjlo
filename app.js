@@ -23,6 +23,17 @@ app.get('/tax-calculator', function(req, res) {
 
 app.post('/tax-calculator', function(req, res) {
   console.log(req.body);
+
+  let salary = req.body.salary;
+   console.log('salary is ' + salary);
+
+   res.send({
+     tax: 1573875,
+     taxAsPercentOfIncome: .1967,
+     taxBracketPercentage: .25,
+   });
+
+
 });
 
 app.listen(PORT, function() {

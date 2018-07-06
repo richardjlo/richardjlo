@@ -38,7 +38,11 @@ module.exports.calculateTax = function(taxableIncome) {
 
   // Returns tax in cents, taxAsPercentOfIncome and taxBracketPercentage
   // in decimal format
-  return [tax, taxAsPercentOfIncome, taxBracketPercentage];
+  return {
+    tax: tax,
+    taxAsPercentOfIncome: taxAsPercentOfIncome,
+    taxBracketPercentage: taxBracketPercentage,
+  };
 };
 
 module.exports.initTaxBrackets = function(originalFedTaxBrackets) {

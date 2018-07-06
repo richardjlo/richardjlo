@@ -13,7 +13,9 @@ $(document).ready(function() {
         url: 'tax-calculator',
         data: {salary: salaryAmount},
         success: function(response) {
-          $('#tax').html('$' + '100');
+          //console.log(response.tax / 100);
+          let taxStr = '$' + response.tax / 100;
+          $('#tax').html(taxStr);
         },
     });
   });
