@@ -33,6 +33,7 @@ describe('#convert text to lower case', function() {
   });
 });
 
+// Upper case
 describe('#convert text to upper case', function() {
   it('upper function should exist', function() {
     expect(convertCase.upper).to.not.be.undefined;
@@ -43,5 +44,22 @@ describe('#convert text to upper case', function() {
     expect(convertCase.upper('hello richard')).to.equal('HELLO RICHARD');
   });
 });
-// Upper case
+
 // Sentence case
+describe('#convert to sentence case', function() {
+  it('should return a a sentence case string', function() {
+    expect(convertCase.sentenceCase('this is a test. my car is red.'))
+    .to.equal('This is a test. My car is red.');
+  });
+
+  // it('should return a a sentence case string', function() {
+  //   expect(convertCase.sentenceCase('a.m.d'))
+  //   .to.equal('A.m.d');
+  // });
+});
+
+  // Capitalize the first letter after a period, escalation mark, or question mark
+  // Capitalize a stand-alone 'I'
+
+
+// Title case
