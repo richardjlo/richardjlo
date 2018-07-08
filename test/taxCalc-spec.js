@@ -29,28 +29,28 @@ describe('#Calculate effective tax rate', function() {
 
   it('should calculate effective tax rate based on ($19,000)', function() {
       // Check tax on $19,000. Should be $2,383.75
-      expect(taxCalc.calculateTax(1900000)).to.eql({
-        tax: 238375,
-        taxAsPercentOfIncome: .1255,
-        taxBracketPercentage: .15,
+      expect(taxCalc.calculateTax(19000)).to.eql({
+        tax: '2383.75',
+        taxAsPercentOfIncome: '12.55',
+        taxBracketPercentage: '15.00',
       });
   });
 
   it('should calculate effective tax rate based on ($20,000)', function() {
       // Check tax on $20,000. Should be $2,533.75
-      expect(taxCalc.calculateTax(2000000)).to.eql({
-        tax: 253375,
-        taxAsPercentOfIncome: .1267,
-        taxBracketPercentage: .15,
+      expect(taxCalc.calculateTax(20000)).to.eql({
+        tax: '2533.75',
+        taxAsPercentOfIncome: '12.67',
+        taxBracketPercentage: '15.00',
       });
   });
 
   it('should calculate effective tax rate based on ($80,000)', function() {
       // Check tax on $80,000. Should be $15,738.75
-      expect(taxCalc.calculateTax(8000000)).to.eql({
-        tax: 1573875,
-        taxAsPercentOfIncome: .1967,
-        taxBracketPercentage: .25,
+      expect(taxCalc.calculateTax(80000)).to.eql({
+        tax: '15738.75',
+        taxAsPercentOfIncome: '19.67',
+        taxBracketPercentage: '25.00',
       });
   });
 });

@@ -1,4 +1,5 @@
 module.exports.calculateTax = function(taxableIncome) {
+  // Convert taxableIncome to cents
   taxableIncome *= 100;
   const taxBracket2017 = [
     [.10, 0, 9325],
@@ -43,7 +44,7 @@ module.exports.calculateTax = function(taxableIncome) {
   // in percentage formats.
   return {
     // Divide by 100 to show result in dollars instead of cents.
-    tax: tax / 100,
+    tax: (tax / 100).toString(),
 
     // Multiply by 100 to show result in percentage
     taxAsPercentOfIncome: taxAsPercentOfIncome,
