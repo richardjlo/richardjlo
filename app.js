@@ -23,8 +23,7 @@ app.get('/tax-calculator', function(req, res) {
 
 const taxCalc = require('./routes/taxCalc.js');
 app.post('/tax-calculator', function(req, res) {
-  let salary = req.body.salary;
-  let taxInfo = taxCalc.calculateTax(salary);
+  let taxInfo = taxCalc.calculateTax(req.body.salary);
   res.send(taxInfo);
 });
 
