@@ -3,7 +3,7 @@
 const Chai = require('chai');
 const expect = Chai.expect;
 
-const taxCalc = require('../taxCalc.js');
+const taxCalc = require('../routes/taxCalc.js');
 
 // Normalizes bracket for usage in this program.
 // Minus 1 from all minimum threshholds greater than 0.
