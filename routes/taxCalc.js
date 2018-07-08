@@ -44,7 +44,7 @@ module.exports.calculateTax = function(taxableIncome) {
   // in percentage formats.
   return {
     // Divide by 100 to show result in dollars instead of cents.
-    tax: (tax / 100).toString(),
+    tax: (tax / 100).toLocaleString('en'),
 
     // Multiply by 100 to show result in percentage
     taxAsPercentOfIncome: taxAsPercentOfIncome,

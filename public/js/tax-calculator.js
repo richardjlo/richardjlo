@@ -14,7 +14,7 @@ $(document).ready(function() {
         data: {salary: salaryAmount},
         success: function(response) {
           // Add $ sign and commas.
-          let taxStr = '$' + (response.tax).toLocaleString('en');
+          let taxStr = '$' + (response.tax);
 
           // Add % to string
           let taxAsPercentOfIncomeStr = response.taxAsPercentOfIncome + '%';
