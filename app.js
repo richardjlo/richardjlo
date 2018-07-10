@@ -27,5 +27,9 @@ app.post('/tax-calculator', function(req, res) {
   res.send(taxInfo);
 });
 
+app.get('/convert-case', function(req, res) {
+  res.render('convert-case', {title: 'Convert Case'});
+});
+
 app.listen(PORT, function() {
 });
