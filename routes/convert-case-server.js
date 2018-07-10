@@ -1,4 +1,13 @@
-
+module.exports.convertCase = function(text, caseType) {
+  switch (caseType) {
+    case 'sentence':
+      return this.sentenceCase(text);
+    case 'lower':
+      return text.toLowerCase();
+    case 'upper':
+      return text.toUpperCase();
+  }
+};
 
 module.exports.lower = function(text) {
   return text.toLowerCase();

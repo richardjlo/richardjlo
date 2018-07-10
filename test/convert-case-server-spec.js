@@ -5,6 +5,31 @@ const expect = Chai.expect;
 
 const convertCase = require('../routes/convert-case-server.js');
 
+describe('#convertCase function', function() {
+  let text;
+  let caseType;
+  it('should convert the case given text and caseType.', function() {
+    text = 'this is a test. my car is red and i am tired.';
+    caseType = 'sentence';
+    expect( convertCase.convertCase(text, caseType) ).to.equal(
+      'This is a test. My car is red and I am tired.');
+  });
+
+  it('should convert the case given text and caseType.', function() {
+    text = 'this is a test. my car is red and i am tired.';
+    caseType = 'lower';
+    expect( convertCase.convertCase(text, caseType) ).to.equal(
+      'this is a test. my car is red and i am tired.');
+  });
+
+  it('should convert the case given text and caseType.', function() {
+    text = 'this is a test. my car is red and i am tired.';
+    caseType = 'upper';
+    expect( convertCase.convertCase(text, caseType) ).to.equal(
+      'THIS IS A TEST. MY CAR IS RED AND I AM TIRED.');
+  });
+});
+
 describe('#convertCase file should exist', function() {
   it('convert-case-server.js file should exist', function() {
     expect(convertCase).to.not.be.undefined;
