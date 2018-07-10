@@ -1,0 +1,38 @@
+<%- include('includes/head.ejs'); %>
+  <body>
+    <%- include('includes/nav.ejs'); %>
+    <div class="jumbotron">
+      <h1 class="display-4">Convert Case</h1>
+      <p class="lead">A nifty text editing tool for freelance designers.</p>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+              <label for="textArea">
+                Step 1: Enter your text</br>
+                Step 2: Choose the case you want
+              </label>
+              <textarea class="form-control" id="textArea" rows="8"
+                placeholder = "Type or paste your content here..."></textarea>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-secondary" value="sentence">
+              Sentence
+            </button>
+            <button type="button" class="btn btn-secondary" value="lower">
+              lower
+            </button>
+            <button type="button" class="btn btn-secondary" value="upper">
+              UPPER
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('includes/js.ejs'); %>
+    <script type="text/javascript" src='/js/convert-case.js'></script>
+  </body>
+</html>
