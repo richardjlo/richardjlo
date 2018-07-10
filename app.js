@@ -33,7 +33,9 @@ app.get('/convert-case', function(req, res) {
 
 const convertCase = require('./routes/convert-case-server.js');
 app.post('/convert-case', function(req, res) {
-  let convertedText = convertCase.sentenceCase(req.body.text);
+  let text = req.body.text;
+  let caseType = req.body.caseType;
+  let convertedText = convertCase.convertCase(text, caseType);
   res.send({
     text: convertedText,
   });
