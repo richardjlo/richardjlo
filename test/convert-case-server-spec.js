@@ -46,20 +46,36 @@ describe('#convert text to upper case', function() {
 });
 
 // Sentence case
-describe('#convert to sentence case', function() {
-  it('should return a a sentence case string', function() {
-    expect(convertCase.sentenceCase('this is a test. my car is red.'))
-    .to.equal('This is a test. My car is red.');
+// Capitalize the first letter after a '.', '!', '?'
+describe('#convert to sentence case.', function() {
+  // Handle case of '.'
+  it('should return a sentence case string (This is a test. My car is red.)',
+    function() {
+      expect(convertCase.sentenceCase('this is a test. my car is red.'))
+      .to.equal('This is a test. My car is red.');
   });
 
-  // it('should return a a sentence case string', function() {
-  //   expect(convertCase.sentenceCase('a.m.d'))
-  //   .to.equal('A.m.d');
-  // });
+  // Handle case of '.'
+  it('should return a sentence case string for acronym (A.m.d.)', function() {
+    expect(convertCase.sentenceCase('a.m.d'))
+    .to.equal('A.m.d');
+  });
+
+  // Handle case of '!'
+  it('should return a sentence case string ("!") ', function() {
+    expect(convertCase.sentenceCase('this is a test! my car is red.'))
+    .to.equal('This is a test! My car is red.');
+  });
+
+  // Handle case of '?'
+  it('should return a sentence case string ("?") ', function() {
+    expect(convertCase.sentenceCase('is this your house? it is very nice.'))
+    .to.equal('Is this your house? It is very nice.');
+  });
+
+  // // Handle case of stand-alone 'I'
+  it('should return a sentence case string (stand-alone "I") ', function() {
+    expect(convertCase.sentenceCase('there was a time when i was young.'))
+    .to.equal('There was a time when I was young.');
+  });
 });
-
-  // Capitalize the first letter after a period, escalation mark, or question mark
-  // Capitalize a stand-alone 'I'
-
-
-// Title case

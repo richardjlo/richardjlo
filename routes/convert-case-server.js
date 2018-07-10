@@ -19,12 +19,21 @@ module.exports.sentenceCase = function(text) {
 
   // For each word in text, if it has a '.', change the first letter of the
   // next word to upperCase.
+  let cur;
+  let next;
   for (let i = 0; i < text.length; i++) {
-    // if (text.indexOf('.') != -1) {
-    //
-    // }
-  };
+    cur = text[i];
+    if (cur.includes('.') || cur.includes('!') || cur.includes('?')) {
+      next = text[i + 1];
+
+      // is not last word in text
+      if (next) {
+        text[i + 1] = next.charAt(0).toUpperCase() + next.slice(1);
+      }
+    } else if (cur == 'i') {
+      text[i] = cur.charAt(0).toUpperCase();
+    }
+  }
 
   return text.join(' ');
-
 };
