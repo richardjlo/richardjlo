@@ -1,3 +1,5 @@
+
+
 module.exports.lower = function(text) {
   return text.toLowerCase();
 };
@@ -5,7 +7,6 @@ module.exports.lower = function(text) {
 module.exports.upper = function(text) {
   return text.toUpperCase();
 };
-
 
 module.exports.sentenceCase = function(text) {
   // Lowercase string
