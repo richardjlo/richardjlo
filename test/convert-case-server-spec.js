@@ -28,6 +28,13 @@ describe('#convertCase function', function() {
     expect( convertCase.convertCase(text, caseType) ).to.equal(
       'THIS IS A TEST. MY CAR IS RED AND I AM TIRED.');
   });
+
+  // it('should convert the case given text and caseType.', function() {
+  //   text = 'this is a test. my car is red and i am tired.';
+  //   caseType = 'title';
+  //   expect( convertCase.convertCase(text, caseType) ).to.equal(
+  //     'THIS IS A TEST. MY CAR IS RED AND I AM TIRED.');
+  // });
 });
 
 // Sentence case
@@ -62,5 +69,18 @@ describe('#convert to sentence case.', function() {
   it('should return a sentence case string (stand-alone "I") ', function() {
     expect(convertCase.sentenceCase('there was a time when i was young.'))
     .to.equal('There was a time when I was young.');
+  });
+});
+
+describe('#convert to title case.', function() {
+  it('should return a sentence in title case form', function() {
+    expect(convertCase.titleCase('hi mom this is a test.')).to.equal(
+      'Hi Mom This Is a Test.');
+  });
+
+  it('should return a sentence in title case form', function() {
+    expect(convertCase.titleCase(
+      'this is a test. my car is red and i am tired.')).to.equal(
+      'This Is a Test. My Car Is Red and I Am Tired.');
   });
 });

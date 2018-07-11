@@ -39,3 +39,17 @@ module.exports.sentenceCase = function(text) {
 
   return text.join(' ');
 };
+
+module.exports.titleCase = function(text) {
+  // Lowercase string
+  text = text.toLowerCase();
+
+  // Split string into array of strings
+  text = text.split(' ');
+
+  // Capitalize first letter of every word.
+  for (let i = 0; i < text.length; i++) {
+    text[i] = text[i].charAt(0).toUpperCase() + text[i].slice(1);
+  }
+  return text.join(' ');
+};
