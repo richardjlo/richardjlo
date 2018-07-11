@@ -1,3 +1,6 @@
+// Require to-title-case
+require('../vendor/to-title-case-master/to-title-case.js');
+
 module.exports.convertCase = function(text, caseType) {
   switch (caseType) {
     case 'sentence':
@@ -6,6 +9,8 @@ module.exports.convertCase = function(text, caseType) {
       return text.toLowerCase();
     case 'upper':
       return text.toUpperCase();
+    case 'title':
+        return text.toTitleCase();
   }
 };
 
@@ -36,6 +41,5 @@ module.exports.sentenceCase = function(text) {
       text[i] = cur.charAt(0).toUpperCase();
     }
   }
-
   return text.join(' ');
 };
