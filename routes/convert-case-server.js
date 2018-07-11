@@ -10,7 +10,8 @@ module.exports.convertCase = function(text, caseType) {
     case 'upper':
       return text.toUpperCase();
     case 'title':
-        return text.toTitleCase();
+      text = this.sentenceCase(text);
+      return text.toTitleCase();
   }
 };
 
