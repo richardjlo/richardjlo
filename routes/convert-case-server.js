@@ -1,3 +1,6 @@
+// Require to-title-case
+require('../vendor/to-title-case-master/to-title-case.js');
+
 module.exports.convertCase = function(text, caseType) {
   switch (caseType) {
     case 'sentence':
@@ -6,6 +9,8 @@ module.exports.convertCase = function(text, caseType) {
       return text.toLowerCase();
     case 'upper':
       return text.toUpperCase();
+    case 'title':
+        return text.toTitleCase();
   }
 };
 
@@ -35,21 +40,6 @@ module.exports.sentenceCase = function(text) {
     } else if (cur == 'i') {
       text[i] = cur.charAt(0).toUpperCase();
     }
-  }
-
-  return text.join(' ');
-};
-
-module.exports.titleCase = function(text) {
-  // Lowercase string
-  text = text.toLowerCase();
-
-  // Split string into array of strings
-  text = text.split(' ');
-
-  // Capitalize first letter of every word.
-  for (let i = 0; i < text.length; i++) {
-    text[i] = text[i].charAt(0).toUpperCase() + text[i].slice(1);
   }
   return text.join(' ');
 };

@@ -1,4 +1,4 @@
-﻿/* 
+﻿/*
   * To Title Case 2.1 – http://individed.com/code/to-title-case/
   * Copyright © 2008–2013 David Gouch. Licensed under the MIT License.
  */

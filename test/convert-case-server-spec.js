@@ -8,37 +8,36 @@ const convertCase = require('../routes/convert-case-server.js');
 describe('#convertCase function', function() {
   let text;
   let caseType;
-  it('should convert the case given text and caseType.', function() {
+  it('should convert string into sentence case.', function() {
     text = 'this is a test. my car is red and i am tired.';
     caseType = 'sentence';
     expect( convertCase.convertCase(text, caseType) ).to.equal(
       'This is a test. My car is red and I am tired.');
   });
 
-  it('should convert the case given text and caseType.', function() {
+  it('should convert string into lower case.', function() {
     text = 'this is a test. my car is red and i am tired.';
     caseType = 'lower';
     expect( convertCase.convertCase(text, caseType) ).to.equal(
       'this is a test. my car is red and i am tired.');
   });
 
-  it('should convert the case given text and caseType.', function() {
+  it('should convert string into upper case.', function() {
     text = 'this is a test. my car is red and i am tired.';
     caseType = 'upper';
     expect( convertCase.convertCase(text, caseType) ).to.equal(
       'THIS IS A TEST. MY CAR IS RED AND I AM TIRED.');
   });
 
-  // it('should convert the case given text and caseType.', function() {
-  //   text = 'this is a test. my car is red and i am tired.';
-  //   caseType = 'title';
-  //   expect( convertCase.convertCase(text, caseType) ).to.equal(
-  //     'THIS IS A TEST. MY CAR IS RED AND I AM TIRED.');
-  // });
+  it('should convert string into title case.', function() {
+    text = 'this is a test. my car is red and i am tired.';
+    caseType = 'title';
+    expect( convertCase.convertCase(text, caseType) ).to.equal(
+      'This Is a Test. My Car Is Red and I Am Tired.');
+  });
 });
 
-// Sentence case
-// Capitalize the first letter after a '.', '!', '?'
+// Sentence case. Capitalize the first letter after a '.', '!', '?'
 describe('#convert to sentence case.', function() {
   // Handle case of '.'
   it('should return a sentence case string (This is a test. My car is red.)',
@@ -69,18 +68,5 @@ describe('#convert to sentence case.', function() {
   it('should return a sentence case string (stand-alone "I") ', function() {
     expect(convertCase.sentenceCase('there was a time when i was young.'))
     .to.equal('There was a time when I was young.');
-  });
-});
-
-describe('#convert to title case.', function() {
-  it('should return a sentence in title case form', function() {
-    expect(convertCase.titleCase('hi mom this is a test.')).to.equal(
-      'Hi Mom This Is a Test.');
-  });
-
-  it('should return a sentence in title case form', function() {
-    expect(convertCase.titleCase(
-      'this is a test. my car is red and i am tired.')).to.equal(
-      'This Is a Test. My Car Is Red and I Am Tired.');
   });
 });
