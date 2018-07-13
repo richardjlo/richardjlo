@@ -3,7 +3,24 @@ $(document).ready(function() {
 
   $('.case-btn').click(function() {
     let textArea = $('#textArea');
-    let caseType = $(this).val();
+    let btnId = this.id;
+    let caseType;
+
+    switch (btnId) {
+      case 'upper-btn':
+        caseType = 'upper';
+        break;
+      case 'lower-btn':
+        caseType = 'lower';
+        break;
+      case 'title-btn':
+        caseType = 'title';
+        break;
+      case 'sentence-btn':
+        caseType = 'sentence';
+        break;
+    }
+
     convertCase(textArea, caseType);
   });
 });
@@ -28,9 +45,9 @@ let convertCase = function(textArea, caseType) {
 // Initialize functions after page loads.
 let initJS = function() {
   // Enable tooltips
-  $(function() {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
+  // $(function() {
+  //   $('[data-toggle="tooltip"]').tooltip();
+  // });
 
   // Enable copy to clipboard functionality
   copyToClipboard();
@@ -41,10 +58,11 @@ let copyToClipboard = function() {
   let clipboard = new ClipboardJS('#copy-btn');
 
   clipboard.on('success', function(e) {
+    alert('Copied!');
     // Update tooltip
-    let originalText = $('#copy-btn').attr('data-original-title');
-    $('#copy-btn').attr('data-original-title', 'Copied!').tooltip('show');
-    $('#copy-btn').attr('data-original-title', originalText);
+    // let originalText = $('#copy-btn').attr('data-original-title');
+    // $('#copy-btn').attr('data-original-title', 'Copied!').tooltip('show');
+    // $('#copy-btn').attr('data-original-title', originalText);
   });
 
   clipboard.on('error', function(e) {
