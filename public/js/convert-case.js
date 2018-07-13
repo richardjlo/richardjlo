@@ -2,7 +2,7 @@ $(document).ready(function() {
   initJS();
 
   // When any of the convert buttons are clicked, convert text.
-  $('.convert-btn').click(function() {
+  $('.case-btn').click(function() {
     $.ajax({
       type: 'POST',
       url: 'convert-case',
