@@ -9,6 +9,8 @@ $(document).ready(function() {
 });
 
 // Convert case
+// Takes the text area that needs to be converted and
+// a caseType (upper, lower, sentence, title)
 let convertCase = function(textArea, caseType) {
     $.ajax({
       type: 'POST',
