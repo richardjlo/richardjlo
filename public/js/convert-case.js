@@ -1,22 +1,27 @@
 $(document).ready(function() {
   initJS();
 
-  // When any of the convert buttons are clicked, convert text.
   $('.case-btn').click(function() {
+    let textArea = $('#textArea');
+    let caseType = $(this).val();
+    convertCase(textArea, caseType);
+  });
+});
+
+// Convert case
+let convertCase = function(textArea, caseType) {
     $.ajax({
       type: 'POST',
       url: 'convert-case',
       data: {
-        text: $('#textArea').val(),
-        caseType: $(this).val(),
+        text: textArea.val(),
+        caseType: caseType,
       },
       success: function(response) {
-        $('#textArea').val(response.text);
+        textArea.val(response.text);
       },
     });
-  });
-
-});
+};
 
 // Initialize functions after page loads.
 let initJS = function() {
