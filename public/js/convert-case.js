@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  // Enable tooltips
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
   // When any of the convert buttons are clicked, convert text.
   $('.convert-btn').click(function() {
     $.ajax({
@@ -25,7 +30,9 @@ $(document).ready(function() {
     /* Copy the text inside the text field */
     document.execCommand('copy');
 
-    /* Alert the copied text */
-    alert('Copied the text!');
+    /* Update tooltip */
+    let originalText = $('#copy-btn').attr('data-original-title');
+    $('#copy-btn').attr('data-original-title', 'Copied!').tooltip('show');
+    $('#copy-btn').attr('data-original-title', originalText);
   });
 });
