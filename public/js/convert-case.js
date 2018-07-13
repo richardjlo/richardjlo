@@ -1,11 +1,5 @@
 $(document).ready(function() {
-  // Enable tooltips
-  $(function() {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
-
-  // Enable copy to clipboard functionality
-  copyToClipboard();
+  initJS();
 
   // When any of the convert buttons are clicked, convert text.
   $('.convert-btn').click(function() {
@@ -21,8 +15,21 @@ $(document).ready(function() {
       },
     });
   });
+
 });
 
+// Initialize functions after page loads.
+let initJS = function() {
+  // Enable tooltips
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  // Enable copy to clipboard functionality
+  copyToClipboard();
+};
+
+// Copy to clipboard function. Also handles tooltip.
 let copyToClipboard = function() {
   let clipboard = new ClipboardJS('#copy-btn');
 
