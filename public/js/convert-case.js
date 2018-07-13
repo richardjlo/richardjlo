@@ -19,20 +19,21 @@ $(document).ready(function() {
     });
   });
 
-  // Copies text when 'Copy' button is clicked.
-  $('#copy-btn').click(function() {
-    /* Get the text field */
-    let copyText = document.getElementById('textArea');
+  // // Copies text when 'Copy' button is clicked.
+  // $('#copy-btn').click(function() {
+  //   /* Get the text field */
+  //   let copyText = document.getElementById('textArea');
+  //
+  //   /* Select the text field */
+  //   copyText.select();
+  //
+  //   /* Copy the text inside the text field */
+  //   document.execCommand('copy');
+  //
+  //   /* Update tooltip */
+  //   let originalText = $('#copy-btn').attr('data-original-title');
+  //   $('#copy-btn').attr('data-original-title', 'Copied!').tooltip('show');
+  //   $('#copy-btn').attr('data-original-title', originalText);
+  // });
 
-    /* Select the text field */
-    copyText.select();
-
-    /* Copy the text inside the text field */
-    document.execCommand('copy');
-
-    /* Update tooltip */
-    let originalText = $('#copy-btn').attr('data-original-title');
-    $('#copy-btn').attr('data-original-title', 'Copied!').tooltip('show');
-    $('#copy-btn').attr('data-original-title', originalText);
-  });
 });
