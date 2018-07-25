@@ -22,12 +22,11 @@
     "helmet": "^3.12.1",
     "heroku": "^7.0.93",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.3",
     "to": "0.2.9",
+    "tooltip.js": "1.2.0",
     "update": "0.7.4"
   },
   "devDependencies": {
-    "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.9.1",

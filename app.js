@@ -41,5 +41,9 @@ app.post('/convert-case', function(req, res) {
   });
 });
 
+app.get('/lipsum', function(req, res) {
+  res.render('lipsum', {title: 'Lipsum'});
+});
+
 app.listen(PORT, function() {
 });
