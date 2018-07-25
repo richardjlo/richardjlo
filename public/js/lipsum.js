@@ -1,13 +1,15 @@
 $(document).ready(function() {
-  $(function() {
-    $('[data-toggle="tooltip"]').tooltip();
+  // Set Tooltip
+  $('.copy-btn').tooltip({
+    trigger: 'hover',
+    placement: 'top',
+    title: 'Copy to clipboard',
   });
 
   $('.copy-btn').click(function() {
     copyToClipboard();
   });
 });
-
 
 // Copy to clipboard function. Also handles tooltip.
 let copyToClipboard = function() {
@@ -16,7 +18,6 @@ let copyToClipboard = function() {
   clipboard.on('success', function(e) {
     let btn = e.trigger;
     let originalMessage = $(btn).attr('data-original-title');
-
     showTooltip(btn, 'Copied!');
     hideTooltip(btn);
     resetTooltip(btn, originalMessage);
