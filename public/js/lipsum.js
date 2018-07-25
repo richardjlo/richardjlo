@@ -1,15 +1,18 @@
 $(document).ready(function() {
-  // Set Tooltip
-  $('.copy-btn').tooltip({
-    trigger: 'hover',
-    placement: 'top',
-    title: 'Copy to clipboard',
-  });
+  initTooltips('.copy-btn', 'Copy to clipboard');
 
   $('.copy-btn').click(function() {
     copyToClipboard();
   });
 });
+
+let initTooltips = function(elementClass, tooltipTitle) {
+  $(elementClass).tooltip({
+    trigger: 'hover',
+    placement: 'top',
+    title: tooltipTitle,
+  });
+};
 
 // Copy to clipboard function. Also handles tooltip.
 let copyToClipboard = function() {
