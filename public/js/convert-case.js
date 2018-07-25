@@ -1,5 +1,9 @@
 $(document).ready(function() {
-  initJS();
+  initTooltips('.copy-btn', 'Copy to clipboard');
+
+  $('.copy-btn').click(function() {
+    copyToClipboard();
+  });
 
   $('.case-btn').click(function() {
     let textArea = $('#textArea');
@@ -42,30 +46,42 @@ let convertCase = function(textArea, caseType) {
     });
 };
 
-// Initialize functions after page loads.
-let initJS = function() {
-  // Enable tooltips
-  $(function() {
-    $('[data-toggle="tooltip"]').tooltip();
+let initTooltips = function(elementClass, tooltipTitle) {
+  $(elementClass).tooltip({
+    trigger: 'hover',
+    placement: 'top',
+    title: tooltipTitle,
   });
-
-  // Enable copy to clipboard functionality
-  copyToClipboard();
 };
 
 // Copy to clipboard function. Also handles tooltip.
 let copyToClipboard = function() {
-  let clipboard = new ClipboardJS('#copy-btn');
+  let clipboard = new ClipboardJS('.copy-btn');
 
   clipboard.on('success', function(e) {
-    // Update tooltip
-    let originalText = $('#copy-btn').attr('data-original-title');
-    $('#copy-btn').attr('data-original-title', 'Copied!').tooltip('show');
-    $('#copy-btn').attr('data-original-title', originalText);
+    let btn = e.trigger;
+    let originalMessage = $(btn).attr('data-original-title');
+    showTooltip(btn, 'Copied!');
+    hideTooltip(btn);
+    resetTooltip(btn, originalMessage);
   });
 
   clipboard.on('error', function(e) {
       console.error('Action:', e.action);
       console.error('Trigger:', e.trigger);
   });
+};
+
+let showTooltip = function(btn, message) {
+  $(btn).attr('data-original-title', message).tooltip('show');
+};
+
+let resetTooltip = function(btn, originalMessage) {
+  $(btn).attr('data-original-title', originalMessage);
+};
+
+let hideTooltip = function(btn) {
+  setTimeout(function() {
+    $(btn).tooltip('hide');
+  }, 1000);
 };
