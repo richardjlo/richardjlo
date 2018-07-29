@@ -17,18 +17,18 @@
           <tbody>
             <tr>
               <td>2 Doner Kebab sandwiches</td>
-              <td>Uber to remember restaurant</td>
-              <td>Trdlnik</td>
+              <td>Can Bey Doner Kebab</td>
+              <td>$9.08</td>
             </tr>
             <tr>
-              <td>Can Bey Doner Kebab</td>
+              <td>Uber to remember restaurant</td>
               <td>Uber</td>
-              <td>Food Stall</td>
+              <td>$2.45</td>
             </tr>
             <tr>
               <!-- <th scope="row">3</th> -->
-              <td>$9.08</td>
-              <td>$2.45</td>
+              <td>Trdlnik</td>
+              <td>Food Stall</td>
               <td>$4.54</td>
             </tr>
           </tbody>
@@ -36,6 +36,7 @@
       </div>
       <button type="button" class="btn btn-success float-right">Add Expense</button>
     </div>
+
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -44,10 +45,19 @@
         authDomain: "expense-tracker-a3686.firebaseapp.com",
         databaseURL: "https://expense-tracker-a3686.firebaseio.com",
         projectId: "expense-tracker-a3686",
-        storageBucket: "",
+        storageBucket: "expense-tracker-a3686.appspot.com",
         messagingSenderId: "487206506379"
       };
       firebase.initializeApp(config);
+
+      let transactionId = 0;
+      let db = firebase.database();
+      db.ref('transactions/' + transactionId).set({
+          descripiton: '2 Doner Kebab sandwiches',
+          vendor: 'Can Bey Doner Kebab',
+          amount : '$9.08',
+      });
+
     </script>
     <%- include('includes/js.ejs'); %>
   </body>
