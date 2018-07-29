@@ -45,5 +45,9 @@ app.get('/lipsum', function(req, res) {
   res.render('lipsum', {title: 'Lipsum'});
 });
 
+app.get('/expense-tracker', function(req, res) {
+  res.render('expense-tracker', {title: 'Expense Tracker'});
+});
+
 app.listen(PORT, function() {
 });

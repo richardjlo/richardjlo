@@ -1,0 +1,43 @@
+<%- include('includes/head.ejs'); %>
+  <body>
+    <%- include('includes/nav.ejs'); %>
+    <div class="container mt-5">
+      <div class="row">
+        <h1>Expense Tracker<h1>
+      </div>
+      <div class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Vendor</th>
+              <th scope="col">Amount (in USD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2 Doner Kebab sandwiches</td>
+              <td>Uber to remember restaurant</td>
+              <td>Trdlnik</td>
+            </tr>
+            <tr>
+              <td>Can Bey Doner Kebab</td>
+              <td>Uber</td>
+              <td>Food Stall</td>
+            </tr>
+            <tr>
+              <!-- <th scope="row">3</th> -->
+              <td>$9.08</td>
+              <td>$2.45</td>
+              <td>$4.54</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-success float-right">Add Expense</button>
+    </div>
+    <%- include('includes/js.ejs'); %>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script type="text/javascript" src='/js/lipsum.js'></script>
+  </body>
+</html>
