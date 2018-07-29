@@ -14,22 +14,7 @@
               <th scope="col">Amount (in USD)</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>2 Doner Kebab sandwiches</td>
-              <td>Can Bey Doner Kebab</td>
-              <td>$9.08</td>
-            </tr>
-            <tr>
-              <td>Uber to remember restaurant</td>
-              <td>Uber</td>
-              <td>$2.45</td>
-            </tr>
-            <tr>
-              <td>Trdlnik</td>
-              <td>Food Stall</td>
-              <td>$4.54</td>
-            </tr>
+          <tbody id="transactionsTable">
           </tbody>
         </table>
       </div>
@@ -87,15 +72,6 @@
       };
       firebase.initializeApp(config);
       const db = firebase.database();
-
-      // let transactionId = 6;
-      //
-      // db.ref('transactions/' + transactionId).set({
-      //     description: '2 Doner Kebab sandwiches',
-      //     vendor: 'Can Bey Doner Kebab',
-      //     amount : '$9.08',
-      // });
-
     </script>
     <%- include('includes/js.ejs'); %>
     <script type="text/javascript" src='/js/expense-tracker.js'></script>
