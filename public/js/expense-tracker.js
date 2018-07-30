@@ -32,16 +32,18 @@ let renderScreen = function() {
   allTransactionsRef.on('child_added', function(data) {
     key = data.key;
     transaction = data.val();
-    addTransactionElement(key, transaction.description, transaction.vendor,
-      transaction.amount);
+    let transactionElement = $('#transactionsTable');
+    addTransactionElement(transactionElement, key, transaction.description,
+      transaction.vendor, transaction.amount);
   });
 
   // Updated transaction
   allTransactionsRef.on('child_changed', function(data) {
     key = data.key;
     transaction = data.val();
-    setTransactionValues(key, transaction.description, transaction.vendor,
-      transaction.amount);
+    let transactionElement = $('#' + key);
+    setTransactionValues(transactionElement, key, transaction.description,
+      transaction.vendor, transaction.amount);
   });
 
   // Delete transaction
@@ -49,8 +51,9 @@ let renderScreen = function() {
 };
 
 // Create transaction
-let addTransactionElement = function(key, description, vendor, amount) {
-  $('#transactionsTable').append('<tr id=' +
+let addTransactionElement = function(transactionElement, key, description,
+  vendor, amount) {
+  transactionElement.append('<tr id=' +
       key + '><td>' +
       description + '</td><td>' +
       vendor + '</td><td>$' +
@@ -60,8 +63,8 @@ let addTransactionElement = function(key, description, vendor, amount) {
 };
 
 // Update transaction
-let setTransactionValues = function(key, description, vendor, amount) {
-  let transactionElement = $('#' + key);
+let setTransactionValues = function(transactionElement, key, description,
+  vendor, amount) {
   transactionElement.replaceWith('<tr id=' +
       key + '><td>' +
       description + '</td><td>' +
