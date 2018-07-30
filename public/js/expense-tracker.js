@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  renderAllTransactions();
+  renderScreen();
 
   let form = $('#newExpenseForm');
   $(form).submit(function(e) {
@@ -10,7 +10,6 @@ $(document).ready(function() {
     let vendor = $('#vendor').val();
     let amount = $('#amount').val();
     createTransaction(description, vendor, amount);
-    alert('added new transaction!');
   });
 });
 
@@ -23,19 +22,7 @@ let createTransaction = function(description, vendor, amount) {
   });
 };
 
-let renderAllTransactions = function() {
-  let transactionsRef = db.ref('transactions/').orderByKey();
-  transactionsRef.once('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      // let childKey = childSnapshot.key;
-      let childData = childSnapshot.val();
-      renderSingleTransaction(childData.description, childData.vendor,
-        childData.amount);
-    });
-  });
-};
-
-let renderSingleTransaction = function(description, vendor, amount) {
+let drawTransaction = function(description, vendor, amount) {
   $('#transactionsTable').append(
     '<tr><td>'+
       description + '</td><td>' +
@@ -44,3 +31,28 @@ let renderSingleTransaction = function(description, vendor, amount) {
     '</td></tr>'
   );
 };
+
+let renderScreen = function() {
+  let allTransactionsRef = db.ref('transactions/').orderByKey();
+
+  // New transaction
+  allTransactionsRef.on('child_added', function(data) {
+    let transaction = data.val();
+    drawTransaction(transaction.description, transaction.vendor,
+      transaction.amount);
+  });
+
+};
+
+// var commentsRef = firebase.database().ref('post-comments/' + postId);
+// commentsRef.on('child_added', function(data) {
+//   addCommentElement(postElement, data.key, data.val().text, data.val().author);
+// });
+//
+// commentsRef.on('child_changed', function(data) {
+//   setCommentValues(postElement, data.key, data.val().text, data.val().author);
+// });
+//
+// commentsRef.on('child_removed', function(data) {
+//   deleteComment(postElement, data.key);
+// });
