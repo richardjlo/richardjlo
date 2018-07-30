@@ -1,12 +1,16 @@
 $(document).ready(function() {
   addTransactionsToScreen();
 
-  $('#addExpense').click(function() {
+  let form = $('#newExpenseForm');
+  $(form).submit(function(e) {
+    // Stop browser from submitting form
+    e.preventDefault();
+
     let description = $('#description').val();
     let vendor = $('#vendor').val();
     let amount = $('#amount').val();
     createTransaction(description, vendor, amount);
-    // addTransactionToScreen(description, vendor, amount);
+    alert('added new transaction!');
   });
 });
 
