@@ -1,8 +1,12 @@
 $(document).ready(function() {
   renderScreen();
 
-  // Create new transaction
+  // Handle form submit
   let form = $('#newExpenseForm');
+  handleFormSubmit(form);
+});
+
+let handleFormSubmit = function(form) {
   $(form).submit(function(e) {
     // Stop browser from submitting form
     e.preventDefault();
@@ -11,8 +15,9 @@ $(document).ready(function() {
     let vendor = $('#vendor').val();
     let amount = $('#amount').val();
     createTransaction(description, vendor, amount);
+    $(form).trigger('reset');
   });
-});
+};
 
 let createTransaction = function(description, vendor, amount) {
   let newTransaction = db.ref('transactions/').push();
