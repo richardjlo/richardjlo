@@ -22,9 +22,9 @@ let createTransaction = function(description, vendor, amount) {
   });
 };
 
-let drawTransaction = function(description, vendor, amount) {
-  $('#transactionsTable').append(
-    '<tr><td>'+
+let drawTransaction = function(transactionId, description, vendor, amount) {
+  $('#transactionsTable').append('<tr id=' +
+      transactionId + '><td>' +
       description + '</td><td>' +
       vendor + '</td><td>$' +
       amount +
@@ -37,11 +37,11 @@ let renderScreen = function() {
 
   // New transaction
   allTransactionsRef.on('child_added', function(data) {
+    let transactionId = data.key;
     let transaction = data.val();
-    drawTransaction(transaction.description, transaction.vendor,
+    drawTransaction(transactionId, transaction.description, transaction.vendor,
       transaction.amount);
   });
-
 };
 
 // var commentsRef = firebase.database().ref('post-comments/' + postId);
