@@ -43,7 +43,7 @@ let renderScreen = function() {
       transaction.vendor, transaction.amount);
   });
 
-  // Updated transaction
+  // Render updated transaction
   allTransactionsRef.on('child_changed', function(data) {
     key = data.key;
     transaction = data.val();
@@ -52,7 +52,7 @@ let renderScreen = function() {
       transaction.vendor, transaction.amount);
   });
 
-  // Delete transaction
+  // Render deleted transaction
   allTransactionsRef.on('child_removed', function(data) {
     key = data.key;
     transactionElement = $('#' + key);
@@ -72,7 +72,7 @@ let addTransactionElement = function(transactionElement, key, description,
   );
 };
 
-// Update transaction
+// Set transaction
 let setTransactionValues = function(transactionElement, key, description,
   vendor, amount) {
   transactionElement.replaceWith('<tr id=' +
