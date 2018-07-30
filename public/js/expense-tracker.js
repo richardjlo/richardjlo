@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  addTransactionsToScreen();
+  renderAllTransactions();
 
   let form = $('#newExpenseForm');
   $(form).submit(function(e) {
@@ -23,19 +23,19 @@ let createTransaction = function(description, vendor, amount) {
   });
 };
 
-let addTransactionsToScreen = function() {
+let renderAllTransactions = function() {
   let transactionsRef = db.ref('transactions/').orderByKey();
   transactionsRef.once('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
-      let childKey = childSnapshot.key;
+      // let childKey = childSnapshot.key;
       let childData = childSnapshot.val();
-      addTransactionToScreen(childData.description, childData.vendor,
+      renderSingleTransaction(childData.description, childData.vendor,
         childData.amount);
     });
   });
 };
 
-let addTransactionToScreen = function(description, vendor, amount) {
+let renderSingleTransaction = function(description, vendor, amount) {
   $('#transactionsTable').append(
     '<tr><td>'+
       description + '</td><td>' +
