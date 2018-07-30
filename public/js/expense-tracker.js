@@ -16,6 +16,7 @@ let handleFormSubmit = function(form) {
     let amount = $('#amount').val();
     createTransaction(description, vendor, amount);
     $(form).trigger('reset');
+    $('#newExpenseModal').modal('toggle');
   });
 };
 
