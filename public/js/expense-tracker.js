@@ -27,12 +27,13 @@ let renderScreen = function() {
   let allTransactionsRef = db.ref('transactions/').orderByKey();
   let key;
   let transaction;
+  let transactionElement;
 
   // Initialize screen and render all new transaction
   allTransactionsRef.on('child_added', function(data) {
     key = data.key;
     transaction = data.val();
-    let transactionElement = $('#transactionsTable');
+    transactionElement = $('#transactionsTable');
     addTransactionElement(transactionElement, key, transaction.description,
       transaction.vendor, transaction.amount);
   });
@@ -41,13 +42,17 @@ let renderScreen = function() {
   allTransactionsRef.on('child_changed', function(data) {
     key = data.key;
     transaction = data.val();
-    let transactionElement = $('#' + key);
+    transactionElement = $('#' + key);
     setTransactionValues(transactionElement, key, transaction.description,
       transaction.vendor, transaction.amount);
   });
 
   // Delete transaction
-  /* insert code here */
+  allTransactionsRef.on('child_removed', function(data) {
+    key = data.key;
+    transactionElement = $('#' + key);
+    deleteTransaction(transactionElement);
+  });
 };
 
 // Create transaction
@@ -74,9 +79,7 @@ let setTransactionValues = function(transactionElement, key, description,
   );
 };
 
-/* TO-DO */
 // Delete transaction
-//
-// commentsRef.on('child_removed', function(data) {
-//   deleteComment(postElement, data.key);
-// });
+let deleteTransaction = function(transactionElement) {
+  transactionElement.remove();
+};
