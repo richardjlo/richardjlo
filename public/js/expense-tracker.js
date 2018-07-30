@@ -64,24 +64,34 @@ let renderScreen = function() {
 // Create transaction
 let addTransactionElement = function(transactionElement, key, description,
   vendor, amount) {
-  transactionElement.append('<tr id=' +
-      key + '><td>' +
-      description + '</td><td>' +
-      vendor + '</td><td>$' +
-      amount +
-    '</td></tr>'
+  transactionElement.append(
+    '<tr id=' + key + '>' +
+      '<td>' + description + '</td>' +
+      '<td>' + vendor + '</td>' +
+      '<td>$' + amount + '</td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>' +
+    '</tr>'
   );
 };
 
 // Set transaction
 let setTransactionValues = function(transactionElement, key, description,
   vendor, amount) {
-  transactionElement.replaceWith('<tr id=' +
-      key + '><td>' +
-      description + '</td><td>' +
-      vendor + '</td><td>$' +
-      amount +
-    '</td></tr>'
+  transactionElement.replaceWith(
+    // '<tr id=' +
+    //   key + '><td>' +
+    //   description + '</td><td>' +
+    //   vendor + '</td><td>$' +
+    //   amount +
+    // '</td></tr>'
+    '<tr id=' + key + '>' +
+      '<td>' + description + '</td>' +
+      '<td>' + vendor + '</td>' +
+      '<td>$' + amount + '</td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>' +
+    '</tr>'
   );
 };
 
