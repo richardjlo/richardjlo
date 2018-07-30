@@ -1,6 +1,7 @@
 $(document).ready(function() {
   renderScreen();
 
+  // Create new transaction
   let form = $('#newExpenseForm');
   $(form).submit(function(e) {
     // Stop browser from submitting form
@@ -22,9 +23,35 @@ let createTransaction = function(description, vendor, amount) {
   });
 };
 
-let drawTransaction = function(transactionId, description, vendor, amount) {
+let renderScreen = function() {
+  let allTransactionsRef = db.ref('transactions/').orderByKey();
+  let key;
+  let transaction;
+
+  // Initialize screen and render all new transaction
+  allTransactionsRef.on('child_added', function(data) {
+    key = data.key;
+    transaction = data.val();
+    addTransactionElement(key, transaction.description, transaction.vendor,
+      transaction.amount);
+  });
+
+  // Updated transaction
+  allTransactionsRef.on('child_changed', function(data) {
+    key = data.key;
+    transaction = data.val();
+    setTransactionValues(key, transaction.description, transaction.vendor,
+      transaction.amount);
+  });
+
+  // Delete transaction
+  /* insert code here */
+};
+
+// Create transaction
+let addTransactionElement = function(key, description, vendor, amount) {
   $('#transactionsTable').append('<tr id=' +
-      transactionId + '><td>' +
+      key + '><td>' +
       description + '</td><td>' +
       vendor + '</td><td>$' +
       amount +
@@ -32,26 +59,20 @@ let drawTransaction = function(transactionId, description, vendor, amount) {
   );
 };
 
-let renderScreen = function() {
-  let allTransactionsRef = db.ref('transactions/').orderByKey();
-
-  // New transaction
-  allTransactionsRef.on('child_added', function(data) {
-    let transactionId = data.key;
-    let transaction = data.val();
-    drawTransaction(transactionId, transaction.description, transaction.vendor,
-      transaction.amount);
-  });
+// Update transaction
+let setTransactionValues = function(key, description, vendor, amount) {
+  let transactionElement = $('#' + key);
+  transactionElement.replaceWith('<tr id=' +
+      key + '><td>' +
+      description + '</td><td>' +
+      vendor + '</td><td>$' +
+      amount +
+    '</td></tr>'
+  );
 };
 
-// var commentsRef = firebase.database().ref('post-comments/' + postId);
-// commentsRef.on('child_added', function(data) {
-//   addCommentElement(postElement, data.key, data.val().text, data.val().author);
-// });
-//
-// commentsRef.on('child_changed', function(data) {
-//   setCommentValues(postElement, data.key, data.val().text, data.val().author);
-// });
+/* TO-DO */
+// Delete transaction
 //
 // commentsRef.on('child_removed', function(data) {
 //   deleteComment(postElement, data.key);
