@@ -1,12 +1,21 @@
 $(document).ready(function() {
-  renderScreen();
 
-  // Handle form submit
+  // On first connect, retrieve all transactions and add to screen
+  let allTransactionsRef = db.ref('transactions/').orderByKey();
+  let key;
+  let transaction;
+  let transactionElement;
+
+  allTransactionsRef.on('child_added', function(data) {
+    key = data.key;
+    transaction = data.val();
+    transactionElement = $('#transactionsTable');
+    addTransactionElement(transactionElement, key, transaction.description,
+      transaction.vendor, transaction.amount);
+  });
+
+  // When the new transaction form is submitted, create new transaction and add to screen
   let form = $('#newExpenseForm');
-  handleFormSubmit(form);
-});
-
-let handleFormSubmit = function(form) {
   $(form).submit(function(e) {
     // Stop browser from submitting form
     e.preventDefault();
@@ -18,7 +27,17 @@ let handleFormSubmit = function(form) {
     $(form).trigger('reset');
     $('#newExpenseModal').modal('toggle');
   });
-};
+
+  // When edit button is clicked, update transaction and add to screen
+  $('#transactionsTable').on('click', '.edit-btn', function() {
+    alert('transaction edited!');
+  });
+
+  // When delete button is clicked, delete transaction and remove from screen
+  $('#transactionsTable').on('click', '.delete-btn', function() {
+    alert('Deleted!');
+  });
+});
 
 let createTransaction = function(description, vendor, amount) {
   let newTransaction = db.ref('transactions/').push();
@@ -35,14 +54,14 @@ let renderScreen = function() {
   let transaction;
   let transactionElement;
 
-  // Initialize screen and render all new transaction
-  allTransactionsRef.on('child_added', function(data) {
-    key = data.key;
-    transaction = data.val();
-    transactionElement = $('#transactionsTable');
-    addTransactionElement(transactionElement, key, transaction.description,
-      transaction.vendor, transaction.amount);
-  });
+  // // Initialize screen and render all new transaction
+  // allTransactionsRef.on('child_added', function(data) {
+  //   key = data.key;
+  //   transaction = data.val();
+  //   transactionElement = $('#transactionsTable');
+  //   addTransactionElement(transactionElement, key, transaction.description,
+  //     transaction.vendor, transaction.amount);
+  // });
 
   // Render updated transaction
   allTransactionsRef.on('child_changed', function(data) {
@@ -69,8 +88,8 @@ let addTransactionElement = function(transactionElement, key, description,
       '<td>' + description + '</td>' +
       '<td>' + vendor + '</td>' +
       '<td>$' + amount + '</td>' +
-      '<td><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></td>' +
-      '<td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn">Edit</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-danger delete-btn">Delete</button></td>' +
     '</tr>'
   );
 };
@@ -79,18 +98,12 @@ let addTransactionElement = function(transactionElement, key, description,
 let setTransactionValues = function(transactionElement, key, description,
   vendor, amount) {
   transactionElement.replaceWith(
-    // '<tr id=' +
-    //   key + '><td>' +
-    //   description + '</td><td>' +
-    //   vendor + '</td><td>$' +
-    //   amount +
-    // '</td></tr>'
     '<tr id=' + key + '>' +
       '<td>' + description + '</td>' +
       '<td>' + vendor + '</td>' +
       '<td>$' + amount + '</td>' +
-      '<td><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></td>' +
-      '<td><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn">Edit</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-danger delete-btn">Delete</button></td>' +
     '</tr>'
   );
 };
