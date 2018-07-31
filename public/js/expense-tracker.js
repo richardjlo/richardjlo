@@ -7,57 +7,45 @@ $(document).ready(function() {
 
   // When the new transaction form is submitted, create new transaction in db
   let newExpenseform = $('#newExpenseForm');
-  $(newExpenseform).submit(function(e) {
-    // Stop browser from submitting form
-    e.preventDefault();
-
-    let description = $('#description').val();
-    let vendor = $('#vendor').val();
-    let amount = $('#amount').val();
-    createTransaction(transactionsRef, description, vendor, amount);
-    $(newExpenseform).trigger('reset');
-    $('#newExpenseModal').modal('toggle');
-  });
-
-  // When edit button is clicked, update transaction in db
-  $('#transactionsTable').on('click', '.edit-btn', function() {
-    $('#updateExpenseModal').modal('toggle');
-    /*
-    // TO DO - prepoulate form with current transaction values.
-    let amount = $(this).parent().siblings('.amount').text();
-    let description = $(this).parent().siblings('.description').text();
-    let vendor = $(this).parent().siblings('.vendor').text();
-    */
-
-    let key = $(this).parent().parent().attr('id');
-    let transaction = db.ref('transactions/' + key);
-
-    // When the transaction form is submitted, update transaction in db
-    let updateExpenseForm = $('#updateExpenseForm');
-    $(updateExpenseForm).submit(function(et) {
-      // Stop browser from submitting form
-      et.preventDefault();
-
-      let newDescription = $('#update-description').val();
-      let newVendor = $('#update-vendor').val();
-      let newAmount = $('#update-amount').val();
-
-      console.log(newDescription + ' ' + newVendor + ' ' + newAmount);
-      transaction.update({
-        amount: newAmount,
-        description: newDescription,
-        vendor: newVendor,
-      });
-      // $(updateExpenseForm).reset();
-      // $('#updateExpenseModal').modal('toggle');
-    });
-  });
+  createNewExpense(newExpenseform, transactionsRef);
 
   // When delete button is clicked, delete transaction from db
   $('#transactionsTable').on('click', '.delete-btn', function() {
     let key = $(this).parent().parent().attr('id');
     let transaction = db.ref('transactions/' + key);
     transaction.remove();
+  });
+
+  // Attach transaction key to updateExpenseForm modal.
+  $('#transactionsTable').on('click', '.edit-btn', function() {
+    let key = $(this).parent().parent().attr('id');
+    $('#updateExpenseForm').val(key);
+  });
+
+  // When the transaction form is submitted, update transaction in db
+  let updateExpenseForm = $('#updateExpenseForm');
+  $(updateExpenseForm).submit(function(event) {
+    // Stop browser from submitting form
+    event.preventDefault();
+
+    // Get key from form's value
+    let key = $(updateExpenseForm).val();
+    let transaction = db.ref('transactions/' + key);
+
+    // Get new values
+    let newDescription = $('#update-description').val();
+    let newVendor = $('#update-vendor').val();
+    let newAmount = $('#update-amount').val();
+
+    // Update transaction
+    transaction.update({
+      amount: newAmount,
+      description: newDescription,
+      vendor: newVendor,
+    });
+
+    $(updateExpenseForm).trigger('reset');
+    $('#updateExpenseModal').modal('toggle');
   });
 });
 
@@ -79,7 +67,7 @@ let addTransactionElement = function(transactionsTable, key, description,
       '<td class="description">' + description + '</td>' +
       '<td class="vendor">' + vendor + '</td>' +
       '<td class="amount">$' + amount + '</td>' +
-      '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn">Edit</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn"  data-toggle="modal" data-target="#updateExpenseModal">Edit</button></td>' +
       '<td><button type="button" class="btn btn-sm btn-outline-danger delete-btn">Delete</button></td>' +
     '</tr>'
   );
@@ -93,7 +81,7 @@ let setTransactionValues = function(transactionElement, key, description,
       '<td class="description">' + description + '</td>' +
       '<td class="vendor">' + vendor + '</td>' +
       '<td class="amount">$' + amount + '</td>' +
-      '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn">Edit</button></td>' +
+      '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn"  data-toggle="modal" data-target="#updateExpenseModal">Edit</button></td>' +
       '<td><button type="button" class="btn btn-sm btn-outline-danger delete-btn">Delete</button></td>' +
     '</tr>'
   );
@@ -132,5 +120,19 @@ let renderTransactions = function(transactionsRef) {
     key = data.key;
     transactionElement = $('#' + key);
     removeTransaction(transactionElement);
+  });
+};
+
+let createNewExpense = function(newExpenseform, transactionsRef) {
+  $(newExpenseform).submit(function(e) {
+    // Stop browser from submitting form
+    e.preventDefault();
+
+    let description = $('#description').val();
+    let vendor = $('#vendor').val();
+    let amount = $('#amount').val();
+    createTransaction(transactionsRef, description, vendor, amount);
+    $(newExpenseform).trigger('reset');
+    $('#newExpenseModal').modal('toggle');
   });
 };
