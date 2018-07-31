@@ -1,20 +1,36 @@
 $(document).ready(function() {
-
-  // On first connect, retrieve all transactions and add to screen
-  let allTransactionsRef = db.ref('transactions/').orderByKey();
+  const db = firebase.database();
+  let transactionsRef = db.ref('transactions/');
   let key;
   let transaction;
   let transactionElement;
 
-  allTransactionsRef.on('child_added', function(data) {
+  // Read: Add all current and future transaction elements to screen.
+  transactionsRef.orderByKey().on('child_added', function(data) {
     key = data.key;
     transaction = data.val();
-    transactionElement = $('#transactionsTable');
-    addTransactionElement(transactionElement, key, transaction.description,
+    addTransactionElement($('#transactionsTable'), key, transaction.description,
       transaction.vendor, transaction.amount);
   });
 
-  // When the new transaction form is submitted, create new transaction and add to screen
+  // Update: Update transaction element when transaction is updated in db.
+  transactionsRef.on('child_changed', function(data) {
+    key = data.key;
+    transaction = data.val();
+    transactionElement = $('#' + key);
+    setTransactionValues(transactionElement, key, transaction.description,
+      transaction.vendor, transaction.amount);
+  });
+
+  // Delete: Remove transaction element from screen when transaction is
+  //  deleted from db.
+  transactionsRef.on('child_removed', function(data) {
+    key = data.key;
+    transactionElement = $('#' + key);
+    removeTransaction(transactionElement);
+  });
+
+  // When the new transaction form is submitted, create new transaction in db
   let form = $('#newExpenseForm');
   $(form).submit(function(e) {
     // Stop browser from submitting form
@@ -23,24 +39,27 @@ $(document).ready(function() {
     let description = $('#description').val();
     let vendor = $('#vendor').val();
     let amount = $('#amount').val();
-    createTransaction(description, vendor, amount);
+    createTransaction(transactionsRef, description, vendor, amount);
     $(form).trigger('reset');
     $('#newExpenseModal').modal('toggle');
   });
 
-  // When edit button is clicked, update transaction and add to screen
+  // When edit button is clicked, update transaction in db
   $('#transactionsTable').on('click', '.edit-btn', function() {
     alert('transaction edited!');
   });
 
-  // When delete button is clicked, delete transaction and remove from screen
+  // When delete button is clicked, delete transaction from db
   $('#transactionsTable').on('click', '.delete-btn', function() {
-    alert('Deleted!');
+    let key = $(this).parent().parent().attr('id');
+    let transaction = db.ref('transactions/' + key);
+    transaction.remove();
   });
 });
 
-let createTransaction = function(description, vendor, amount) {
-  let newTransaction = db.ref('transactions/').push();
+// Create new transaction in db
+let createTransaction = function(transactionsRef, description, vendor, amount) {
+  let newTransaction = transactionsRef.push();
   newTransaction.set({
       description: description,
       vendor: vendor,
@@ -48,42 +67,10 @@ let createTransaction = function(description, vendor, amount) {
   });
 };
 
-let renderScreen = function() {
-  let allTransactionsRef = db.ref('transactions/').orderByKey();
-  let key;
-  let transaction;
-  let transactionElement;
-
-  // // Initialize screen and render all new transaction
-  // allTransactionsRef.on('child_added', function(data) {
-  //   key = data.key;
-  //   transaction = data.val();
-  //   transactionElement = $('#transactionsTable');
-  //   addTransactionElement(transactionElement, key, transaction.description,
-  //     transaction.vendor, transaction.amount);
-  // });
-
-  // Render updated transaction
-  allTransactionsRef.on('child_changed', function(data) {
-    key = data.key;
-    transaction = data.val();
-    transactionElement = $('#' + key);
-    setTransactionValues(transactionElement, key, transaction.description,
-      transaction.vendor, transaction.amount);
-  });
-
-  // Render deleted transaction
-  allTransactionsRef.on('child_removed', function(data) {
-    key = data.key;
-    transactionElement = $('#' + key);
-    deleteTransaction(transactionElement);
-  });
-};
-
 // Create transaction
-let addTransactionElement = function(transactionElement, key, description,
+let addTransactionElement = function(transactionsTable, key, description,
   vendor, amount) {
-  transactionElement.append(
+  transactionsTable.append(
     '<tr id=' + key + '>' +
       '<td>' + description + '</td>' +
       '<td>' + vendor + '</td>' +
@@ -109,6 +96,6 @@ let setTransactionValues = function(transactionElement, key, description,
 };
 
 // Delete transaction
-let deleteTransaction = function(transactionElement) {
+let removeTransaction = function(transactionElement) {
   transactionElement.remove();
 };
