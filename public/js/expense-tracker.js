@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   const db = firebase.database();
   let transactionsRef = db.ref('transactions/');
