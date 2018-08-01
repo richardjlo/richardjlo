@@ -18,8 +18,19 @@ $(document).ready(function() {
 
   // Attach transaction key to updateExpenseForm modal.
   $('#transactionsTable').on('click', '.edit-btn', function() {
-    let key = $(this).parent().parent().attr('id');
+    let transactionElement = $(this).parent().parent();
+    let key = transactionElement.attr('id');
+
+    // Add key to form
     $('#updateExpenseForm').val(key);
+
+    // Pre-populate form fields
+    let origDescription = transactionElement.children('.description').text();
+    let origVendor = transactionElement.children('.vendor').text();
+    let origAmount = transactionElement.children('.amount').attr('value');
+    $('#update-description').val(origDescription);
+    $('#update-vendor').val(origVendor);
+    $('#update-amount').val(origAmount);
   });
 
   // When the transaction form is submitted, update transaction in db
@@ -66,7 +77,7 @@ let addTransactionElement = function(transactionsTable, key, description,
     '<tr id=' + key + '>' +
       '<td class="description">' + description + '</td>' +
       '<td class="vendor">' + vendor + '</td>' +
-      '<td class="amount">$' + amount + '</td>' +
+      '<td class="amount" value="' + amount + '">$' + amount + '</td>' +
       '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn"  data-toggle="modal" data-target="#updateExpenseModal">Edit</button></td>' +
       '<td><button type="button" class="btn btn-sm btn-outline-danger delete-btn">Delete</button></td>' +
     '</tr>'
@@ -80,7 +91,7 @@ let setTransactionValues = function(transactionElement, key, description,
     '<tr id=' + key + '>' +
       '<td class="description">' + description + '</td>' +
       '<td class="vendor">' + vendor + '</td>' +
-      '<td class="amount">$' + amount + '</td>' +
+      '<td class="amount" value="' + amount + '">$' + amount + '</td>' +
       '<td><button type="button" class="btn btn-sm btn-outline-secondary edit-btn"  data-toggle="modal" data-target="#updateExpenseModal">Edit</button></td>' +
       '<td><button type="button" class="btn btn-sm btn-outline-danger delete-btn">Delete</button></td>' +
     '</tr>'
