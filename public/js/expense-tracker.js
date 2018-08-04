@@ -1,5 +1,16 @@
 
 $(document).ready(function() {
+  // Initialize Firebase
+  const config = {
+    apiKey: 'AIzaSyCDt4GDmJ7PBUh7AIhRdnD-kD5tleAzciQ',
+    authDomain: 'expense-tracker-a3686.firebaseapp.com',
+    databaseURL: 'https://expense-tracker-a3686.firebaseio.com',
+    projectId: 'expense-tracker-a3686',
+    storageBucket: 'expense-tracker-a3686.appspot.com',
+    messagingSenderId: '487206506379',
+  };
+
+  firebase.initializeApp(config);
   const db = firebase.database();
   let transactionsRef = db.ref('transactions/');
 
