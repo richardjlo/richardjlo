@@ -22,6 +22,7 @@
     "helmet": "3.13.0",
     "heroku": "7.7.8",
     "jquery": "3.3.1",
+    "request": "2.87.0",
     "to": "0.2.9",
     "tooltip.js": "1.2.0",
     "update": "0.7.4"
