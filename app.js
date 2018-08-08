@@ -49,5 +49,9 @@ app.get('/expense-tracker', function(req, res) {
   res.render('expense-tracker', {title: 'Expense Tracker'});
 });
 
+app.get('/weather', function(req, res) {
+  res.render('weather', {title: 'Weather'});
+});
+
 app.listen(PORT, function() {
 });
