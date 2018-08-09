@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,19 +50,10 @@ app.get('/expense-tracker', function(req, res) {
   res.render('expense-tracker', {title: 'Expense Tracker'});
 });
 
+const weatherApp = require('./routes/weather-server.js');
 app.get('/weather', function(req, res) {
   res.render('weather', {title: 'Weather'});
-  const request = require('request');
-  const open_weather_api_key = process.env.OPEN_WEATHER_API_KEY;
-  let city = 'portland';
-  let url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + open_weather_api_key;
-  request(url, function(err, response, body) {
-    if(err) {
-      console.log('error:', error);
-    } else {
-      console.log('body:', body);
-    }
-  });
+  weatherApp.showWeather();
 });
 
 app.listen(PORT, function() {
