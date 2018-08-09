@@ -53,7 +53,7 @@ app.get('/expense-tracker', function(req, res) {
 const weatherApp = require('./routes/weather-server.js');
 app.get('/weather', function(req, res) {
   res.render('weather', {title: 'Weather'});
-  weatherApp.showWeather();
+  // weatherApp.getWeather('berlin');
 });
 
 app.listen(PORT, function() {

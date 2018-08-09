@@ -1,19 +1,18 @@
 const request = require('request');
 const open_weather_api_key = process.env.OPEN_WEATHER_API_KEY;
-console.log('api key: ' + open_weather_api_key);
 
-module.exports.showWeather = function() {
-  let city = 'portland';
-  let url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + open_weather_api_key;
+
+module.exports.getWeather = function(city) {
+  let weatherStr = '';
+  let url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + open_weather_api_key;
   request(url, function(err, response, body) {
-    if(err) {
+    if (err) {
       console.log('error:', error);
     } else {
-      console.log('body:', body);
+      let weather = JSON.parse(body);
+      weatherStr = 'It\'s '+ weather.main.temp + 'F in ' + city;
+      console.log(weatherStr);
+      return weatherStr;
     }
   });
-};
-
-module.exports.getApiKey = function() {
-
 };
