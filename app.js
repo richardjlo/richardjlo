@@ -56,5 +56,9 @@ app.get('/weather', function(req, res) {
   // weatherApp.getWeather('berlin');
 });
 
+app.get('/callbacks', function(req, res) {
+  res.render('callbacks', {title: 'Callbacks'});
+});
+
 app.listen(PORT, function() {
 });
