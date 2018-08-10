@@ -29,9 +29,6 @@ createPost = function(post) {
 };
 */
 
-
-
-
 // Using Callbacks
 /*
 $(document).ready(function() {
