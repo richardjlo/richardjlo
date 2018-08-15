@@ -20,5 +20,8 @@ let showWeather = (form) => {
     success: function(response) {
       $('#weather').text(response);
     },
+    error: function(error) {
+      console.log('bad news bears: ' + error);
+    },
   });
 };
