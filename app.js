@@ -7,6 +7,7 @@ const path = require('path');
 
 let bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.json());
 
 // Middleware that allows Express to serve static files.
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,10 +51,14 @@ app.get('/expense-tracker', function(req, res) {
   res.render('expense-tracker', {title: 'Expense Tracker'});
 });
 
-const weatherApp = require('./routes/weather-server.js');
 app.get('/weather', function(req, res) {
   res.render('weather', {title: 'Weather'});
-    weatherApp.getWeather('berlin');
+});
+
+const weatherApp = require('./routes/weather-server.js');
+app.post('/weather', function(req, res) {
+  let city = req.body.city;
+  weatherApp.getWeather(city, res);
 });
 
 app.get('/callbacks', function(req, res) {

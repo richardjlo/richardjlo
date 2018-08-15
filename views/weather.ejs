@@ -6,15 +6,23 @@
         <h1>Weather</h1>
       </div>
       <div class="row">
-        <form>
-          <div class="form-group">
-            <label for="city">What's the weather in your city?</label>
-            <input type="text" class="form-control" id="city" placeholder="Enter city">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="col-md-3">
+          <form id="weatherForm">
+            <div class="form-group">
+              <label for="city">What's the weather in your city?</label>
+              <input type="text" class="form-control" id="city" placeholder="Enter city">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 mt-5">
+          <h3 id="weather"></h3>
+        </div>
       </div>
     </div>
     <%- include('includes/js.ejs'); %>
+    <script type="text/javascript" src='/js/weather.js'></script>
   </body>
 </html>
