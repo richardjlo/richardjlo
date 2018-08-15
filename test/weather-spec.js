@@ -8,6 +8,6 @@ const weatherApp = require('../routes/weather-server.js');
 
 describe('#Get weather', function() {
   it('should return weather string.', function() {
-    expect(weatherApp.getWeather('berlin')).to.be.a('string');
+    expect(weatherApp.init('berlin')).to.be.a('string');
   });
 });
