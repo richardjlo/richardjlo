@@ -1,8 +1,19 @@
 <%- include('includes/head.ejs'); %>
   <body>
     <%- include('includes/nav.ejs'); %>
-    <div class="container">
-      <h1>Weather</h1>
+    <div class="container mt-5">
+      <div class="row">
+        <h1>Weather</h1>
+      </div>
+      <div class="row">
+        <form>
+          <div class="form-group">
+            <label for="city">What's the weather in your city?</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter city">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
     </div>
     <%- include('includes/js.ejs'); %>
   </body>
