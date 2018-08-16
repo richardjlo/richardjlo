@@ -13,11 +13,10 @@ let showWeather = (form) => {
     method: 'POST',
     url: 'weather',
     data: form.serialize(),
-    success: function(response) {
-      $('#weather').text(response);
-    },
-    error: function(error) {
-      console.log('bad news bears: ' + error);
-    },
+  }).done(function(response) {
+    $('#weather').text(response);
+  }).fail(function(error) {
+    // alert('fail');
+    console.log(error);
   });
 };
