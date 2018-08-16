@@ -16,7 +16,10 @@ let showWeather = (form) => {
   }).done( (response) => {
     $('#weather').text(response);
   }).fail( (error) => {
-    // alert('fail');
-    console.log(error);
+    if (error.status == 400) {
+      $('#weather').text('<-- Please enter a city');
+    } else if (error.status == 404) {
+      $('#weather').text('We couldn\'t find your city. Please try again.');
+    }
   });
 };
