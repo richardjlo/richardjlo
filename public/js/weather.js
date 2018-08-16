@@ -13,9 +13,9 @@ let showWeather = (form) => {
     method: 'POST',
     url: 'weather',
     data: form.serialize(),
-  }).done(function(response) {
+  }).done( (response) => {
     $('#weather').text(response);
-  }).fail(function(error) {
+  }).fail( (error) => {
     // alert('fail');
     console.log(error);
   });
