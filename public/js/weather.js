@@ -9,14 +9,10 @@ $(document).ready( () => {
 });
 
 let showWeather = (form) => {
-  let city = form.find('#city').val();
-
   $.ajax({
     method: 'POST',
     url: 'weather',
-    data: {
-      'city': city,
-    },
+    data: form.serialize(),
     success: function(response) {
       $('#weather').text(response);
     },

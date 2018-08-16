@@ -57,8 +57,7 @@ app.get('/weather', function(req, res) {
 
 const weatherApp = require('./routes/weather-server.js');
 app.post('/weather', function(req, res, next) {
-  let city = req.body.city;
-  weatherApp.getWeather(city, res, next);
+  weatherApp.getWeather(req.body.city, res, next);
 });
 
 app.get('/callbacks', function(req, res) {
