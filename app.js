@@ -3,9 +3,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const helmet = require('helmet');
 const path = require('path');
-
-const config = require('./config.js').get(process.env.NODE_ENV);
-console.log('Environment: ' + config.mode);
+if (process.env.NODE_ENV != 'production') {
+  require('dotenv').config();
+}
 
 let bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
