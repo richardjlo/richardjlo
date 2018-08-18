@@ -1,7 +1,6 @@
 module.exports.get = function(env) {
   // Run environment-specific commands.
-  if (env == 'production') {
-  } else {
+  if (env != 'production') {
     require('dotenv').config();
   }
 
