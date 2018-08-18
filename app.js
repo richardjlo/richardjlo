@@ -65,5 +65,11 @@ app.get('/callbacks', function(req, res) {
   res.render('callbacks', {title: 'Callbacks'});
 });
 
+const maps = require('./routes/maps-server.js');
+app.get('/maps', function(req, res) {
+  res.render('maps', {title: 'Maps'});
+  maps.helloWorld();
+});
+
 app.listen(PORT, function() {
 });

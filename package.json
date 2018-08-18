@@ -14,6 +14,7 @@
   "author": "Richard Lo",
   "license": "ISC",
   "dependencies": {
+    "@google/maps": "0.5.5",
     "body-parser": "1.18.3",
     "bootstrap": "4.1.3",
     "clipboard": "2.0.1",
