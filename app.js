@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const helmet = require('helmet');
 const path = require('path');
+
 const config = require('./config.js').get(process.env.NODE_ENV);
 console.log('Environment: ' + config.mode);
 
