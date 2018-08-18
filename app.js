@@ -1,13 +1,13 @@
-// require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const helmet = require('helmet');
 const path = require('path');
+const config = require('./config.js').get(process.env.NODE_ENV);
+console.log('Environment: ' + config.mode);
 
 let bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.json());
 
 // Middleware that allows Express to serve static files.
 app.use(express.static(path.join(__dirname, 'public')));
