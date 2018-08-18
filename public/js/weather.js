@@ -17,7 +17,6 @@ let showWeather = (form) => {
     $('#weather').text(response);
   }).fail( (error) => {
     if (error.status == 400) {
-
       // TODO Replace with form validation.
       $('#weather').text('<-- Please enter a city');
     } else if (error.status == 404) {

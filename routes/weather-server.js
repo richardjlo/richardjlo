@@ -8,7 +8,7 @@ module.exports.getWeather = (city, res, next) => {
   }).then(function(body) {
     let result = JSON.parse(body);
     let temp = result.main.temp;
-    let weatherStr = 'It\'s '+ temp + '℉ in ' + city;
+    let weatherStr = 'It\'s currently '+ temp + '℉ in ' + city;
     res.send(weatherStr);
   }).catch(function(error) {
     next(error);
