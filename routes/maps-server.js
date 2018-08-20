@@ -51,34 +51,22 @@ module.exports.helloWorld = () => {
       limit: 5,
     },
   };
-
   rp(options)
     .then(function(body) {
       let result = JSON.parse(body);
       let venues = result.response.venues;
-      for (let venue of venues) {
-        getVenue(venue.id);
-      }
+      let venue = venues[0];
+      let options2 = {
+        url: 'https://api.foursquare.com/v2/venues/' + venue.id,
+        method: 'GET',
+        qs: {
+          client_id: 'Y0IWGKGNDLQUEOA2QLRUILZYN5DNGMTMXAIJZAB00YLQZETR',
+          client_secret: fourSquareSecret,
+          v: '20180323',
+        },
+      };
+      return rp(options2); // Get details about venue.
     })
-    .catch(function(err) {
-      console.error(err);
-    });
-};
-
-
-// Get name, rating of restaurants.
-let getVenue = (venueId) => {
-  let options = {
-    url: 'https://api.foursquare.com/v2/venues/' + venueId,
-    method: 'GET',
-    qs: {
-      client_id: 'Y0IWGKGNDLQUEOA2QLRUILZYN5DNGMTMXAIJZAB00YLQZETR',
-      client_secret: fourSquareSecret,
-      v: '20180323',
-    },
-  };
-
-  rp(options)
     .then(function(body) {
       let venue = JSON.parse(body).response.venue;
       console.log(venue.name + ' ' + venue.rating);
