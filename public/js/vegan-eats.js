@@ -3,7 +3,6 @@ $(document).ready(function() {
   form.submit( (e) => {
     // Stop browser from submitting form
     e.preventDefault();
-
     getRestaurants(form);
   });
 });

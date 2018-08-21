@@ -1,3 +1,4 @@
+const Promise = require('bluebird');
 const rp = require('request-promise');
 const _ = require('underscore');
 let fourSquareSecret = process.env.FOURSQUARE_CLIENT_SECRET;
@@ -13,9 +14,11 @@ module.exports.getVegan = (location, res) => {
       radius: '1000',
       section: 'food',
       categoryId: '4bf58dd8d48988d1d3941735',
-      ll: '52.510411, 13.457715', // TODO - update with user's lat, long. Get from browser.
+
+      // TODO - update with user's lat, long. Get from browser.
+      ll: '52.510411, 13.457715',
       v: '20180323',
-      limit: 10,
+      limit: 5,
     },
   };
   rp(options)
@@ -23,10 +26,8 @@ module.exports.getVegan = (location, res) => {
     .then(function(body) {
       let result = JSON.parse(body);
       let venues = result.response.venues;
-      let promises = [];
 
-      // Create array of promises
-      for (let venue of venues) {
+      return Promise.map(venues, function(venue) {
         let options2 = {
           url: 'https://api.foursquare.com/v2/venues/' + venue.id,
           method: 'GET',
@@ -36,11 +37,8 @@ module.exports.getVegan = (location, res) => {
             v: '20180323',
           },
         };
-        promises.push(rp(options2));
-      }
-
-      // Call all promises. Expect output to be an array of venue details
-      return Promise.all(promises);
+        return rp(options2);
+      });
     })
     .then(function(result) {
       let venue;
@@ -57,14 +55,11 @@ module.exports.getVegan = (location, res) => {
       }
 
       // Sort restaurants array
-      return sortedRestaurants = _.sortBy(restaurants, 'rating').reverse();
+      let sortedRestaurants = _.sortBy(restaurants, 'rating').reverse();
+      return sortedRestaurants;
     })
     .then(function(sortedRestaurants) {
       res.send(sortedRestaurants);
-      // Print each restaurant
-      // for (let restaurant of sortedRestaurants) {
-      //   console.log(restaurant.name + ' ' + restaurant.rating);
-      // }
     })
     .catch(function(err) {
       console.error(err);
