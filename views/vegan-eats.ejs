@@ -1,0 +1,25 @@
+<%- include('includes/head.ejs'); %>
+  <body>
+    <%- include('includes/nav.ejs'); %>
+    <div class="container mt-5">
+      <div class="row">
+        <h1>Vegan Eats</h1>
+      </div>
+      <div class="row">
+        <form id="restaurantsForm" class="mt-3">
+          <div class="form-group">
+            <label for="location">What's you location?</label>
+            <input type="text" name="location" class="form-control" placeholder="Enter lat, long">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="row mt-3">
+        <ol class="restaurants-list">
+        </ol>
+      </div>
+    </div>
+    <%- include('includes/js.ejs'); %>
+    <script type="text/javascript" src="/js/vegan-eats.js"></script>
+  </body>
+</html>

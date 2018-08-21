@@ -65,10 +65,13 @@ app.get('/callbacks', function(req, res) {
   res.render('callbacks', {title: 'Callbacks'});
 });
 
-const maps = require('./routes/maps-server.js');
-app.get('/maps', function(req, res) {
-  res.render('maps', {title: 'Maps'});
-  maps.helloWorld();
+app.get('/vegan-eats', function(req, res) {
+  res.render('vegan-eats', {title: 'Vegan Eats'});
+});
+
+const veganEats = require('./routes/vegan-eats-server.js');
+app.post('/vegan-eats', function(req, res, next) {
+  veganEats.getVegan(req.body.location, res);
 });
 
 app.listen(PORT, function() {
