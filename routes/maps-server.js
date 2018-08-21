@@ -43,11 +43,24 @@ module.exports.helloWorld = () => {
     })
     .then(function(result) {
       let venue;
+      let restaurants = [];
 
-      // Print out all details. 
+      // Populate restaurants array with name and rating.
       for (let i = 0; i < result.length; i++) {
         venue = JSON.parse(result[i]).response.venue;
-        console.log(venue.name + ' ' + venue.rating);
+        let restaurant = {
+          name: venue.name,
+          rating: venue.rating,
+        };
+        restaurants.push(restaurant);
+      }
+
+      // Sort restaurants array
+
+      // Print each restaurant
+      for (let restaurant of restaurants) {
+        console.log(restaurant.name + ' ' + restaurant.rating);
+        console.log('restaurant rating: ' + typeof restaurant.rating);
       }
     })
     .catch(function(err) {
