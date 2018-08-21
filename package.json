@@ -27,6 +27,7 @@
     "request-promise": "4.2.2",
     "to": "0.2.9",
     "tooltip.js": "1.2.0",
+    "underscore": "1.9.1",
     "update": "0.7.4"
   },
   "devDependencies": {
