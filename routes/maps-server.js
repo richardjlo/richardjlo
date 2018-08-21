@@ -1,4 +1,5 @@
 const rp = require('request-promise');
+const _ = require('underscore');
 let fourSquareSecret = process.env.FOURSQUARE_CLIENT_SECRET;
 
 module.exports.helloWorld = () => {
@@ -56,11 +57,12 @@ module.exports.helloWorld = () => {
       }
 
       // Sort restaurants array
-
+      return sortedRestaurants = _.sortBy(restaurants, 'rating').reverse();
+    })
+    .then(function(sortedRestaurants) {
       // Print each restaurant
-      for (let restaurant of restaurants) {
+      for (let restaurant of sortedRestaurants) {
         console.log(restaurant.name + ' ' + restaurant.rating);
-        console.log('restaurant rating: ' + typeof restaurant.rating);
       }
     })
     .catch(function(err) {
