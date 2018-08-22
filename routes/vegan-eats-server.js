@@ -18,7 +18,7 @@ module.exports.getVegan = (location, res) => {
       // TODO - update with user's lat, long. Get from browser.
       ll: '52.510411, 13.457715',
       v: '20180323',
-      limit: 5,
+      limit: 3,
     },
   };
   rp(options)

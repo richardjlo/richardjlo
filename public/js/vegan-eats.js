@@ -18,8 +18,7 @@ let getRestaurants = (form) => {
     // Print each restaurant
     for (let restaurant of sortedRestaurants) {
       $('.restaurants-list').append(
-        '<li class="list-group-item">' + restaurant.name + ' ' +
-        restaurant.rating + '</li>');
+        '<li class="list-group-item"><a href="https://www.google.com/maps/search/?api=1&query=' + restaurant.name + '"' + ' target="_blank">' + restaurant.name + ' ' + restaurant.rating + '</a></li>');
     }
   }).fail( (error) => {
     console.log(error);
