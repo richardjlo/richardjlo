@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const _ = require('underscore');
 let fourSquareSecret = process.env.FOURSQUARE_CLIENT_SECRET;
 
-module.exports.getVegan = (location, res) => {
+module.exports.getVegan = (latlong, res) => {
   // Search for vegan restaurants in area.
   let options = {
     url: 'https://api.foursquare.com/v2/venues/search',
@@ -14,9 +14,7 @@ module.exports.getVegan = (location, res) => {
       radius: '1000',
       section: 'food',
       categoryId: '4bf58dd8d48988d1d3941735',
-
-      // TODO - update with user's lat, long. Get from browser.
-      ll: '52.510411, 13.457715',
+      ll: latlong,
       v: '20180323',
       limit: 3,
     },
@@ -47,6 +45,8 @@ module.exports.getVegan = (location, res) => {
       // Populate restaurants array with name and rating.
       for (let i = 0; i < result.length; i++) {
         venue = JSON.parse(result[i]).response.venue;
+        // console.log(venue.name + ' ' + venue.location.lat + ',' +  venue.location.lng);
+        // console.log(venue.name + ' ' + venue.location.address + ' ' + venue.location.city);
         let restaurant = {
           name: venue.name,
           rating: venue.rating,
