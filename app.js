@@ -71,7 +71,7 @@ app.get('/vegan-eats', function(req, res) {
 
 const veganEats = require('./routes/vegan-eats-server.js');
 app.post('/vegan-eats', function(req, res, next) {
-  veganEats.getVegan(req.body.location, res);
+  veganEats.getVegan(req.body.ll, res);
 });
 
 app.listen(PORT, function() {
