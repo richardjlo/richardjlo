@@ -16,7 +16,7 @@ module.exports.getVegan = (latlong, res) => {
       categoryId: '4bf58dd8d48988d1d3941735',
       ll: latlong,
       v: '20180323',
-      limit: 5,
+      limit: 3,
     },
   };
   rp(options)

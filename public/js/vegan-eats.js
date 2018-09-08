@@ -3,8 +3,10 @@ $(document).ready(function() {
   form.submit( (e) => {
     let success = (pos) => {
       let coordinates = pos.coords;
-      // let ll = coordinates.latitude + ', ' + coordinates.longitude;
-      let ll = '52.510411, 13.457715'; // TEST -- Berlin
+      let ll = coordinates.latitude + ', ' + coordinates.longitude;
+      // let ll = '52.510411, 13.457715'; // TEST -- Berlin
+      // let ll = '18.797580, 98.971439'; // TEST PT Residence, Chiang Mai
+      // let ll = '-8.517996, 115.261374'; // TEST Hubud, Bali
       $('#ll').val(ll);
       getRestaurants(form);
     };
