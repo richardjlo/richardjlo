@@ -3,9 +3,8 @@ $(document).ready(function() {
   form.submit( (e) => {
     let success = (pos) => {
       let coordinates = pos.coords;
-      let ll = coordinates.latitude + ', ' + coordinates.longitude;
-      // let ll = '52.510411, 13.457715'; // TEST -- Berlin
-      // console.log('lat long: ' + ll); // TEST
+      // let ll = coordinates.latitude + ', ' + coordinates.longitude;
+      let ll = '52.510411, 13.457715'; // TEST -- Berlin
       $('#ll').val(ll);
       getRestaurants(form);
     };
@@ -45,7 +44,7 @@ let getRestaurants = (form, ll) => {
       // Print each restaurant
       for (let restaurant of sortedRestaurants) {
         $('.restaurants-list').append(
-          '<li class="list-group-item"><a href="https://www.google.com/maps/search/?api=1&query=' + restaurant.name + '"' + ' target="_blank">' + restaurant.name + ' ' + restaurant.rating + '</a></li>');
+          '<li class="list-group-item"><a href="' + restaurant.url + '"' + ' target="_blank">' + restaurant.name + ' ' + restaurant.rating + '</a></li>');
       }
     }
   }).fail( (error) => {

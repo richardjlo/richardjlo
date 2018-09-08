@@ -16,7 +16,7 @@ module.exports.getVegan = (latlong, res) => {
       categoryId: '4bf58dd8d48988d1d3941735',
       ll: latlong,
       v: '20180323',
-      limit: 3,
+      limit: 5,
     },
   };
   rp(options)
@@ -45,11 +45,10 @@ module.exports.getVegan = (latlong, res) => {
       // Populate restaurants array with name and rating.
       for (let i = 0; i < result.length; i++) {
         venue = JSON.parse(result[i]).response.venue;
-        // console.log(venue.name + ' ' + venue.location.lat + ',' +  venue.location.lng);
-        // console.log(venue.name + ' ' + venue.location.address + ' ' + venue.location.city);
         let restaurant = {
           name: venue.name,
           rating: venue.rating,
+          url: venue.canonicalUrl,
         };
         restaurants.push(restaurant);
       }
