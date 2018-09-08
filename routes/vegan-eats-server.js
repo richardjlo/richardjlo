@@ -11,7 +11,7 @@ module.exports.getVegan = (latlong, res) => {
     qs: {
       client_id: 'Y0IWGKGNDLQUEOA2QLRUILZYN5DNGMTMXAIJZAB00YLQZETR',
       client_secret: fourSquareSecret,
-      radius: '1000',
+      radius: '1000', // Units are in km
       section: 'food',
       categoryId: '4bf58dd8d48988d1d3941735',
       ll: latlong,
