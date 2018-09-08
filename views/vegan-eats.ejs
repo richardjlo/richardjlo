@@ -3,6 +3,14 @@
     <%- include('includes/nav.ejs'); %>
     <div class="container mt-5">
       <div class="row">
+        <div class="alert alert-warning alert-dismissible fade mx-auto" id="no-results-alert" style="width: 600px;" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          Sorry, we didn't find any restaurants near you.
+        </div>
+      </div>
+      <div class="row">
         <h1>Vegan Eats</h1>
       </div>
       <div class="row">

@@ -4,7 +4,8 @@ $(document).ready(function() {
     let success = (pos) => {
       let coordinates = pos.coords;
       let ll = coordinates.latitude + ', ' + coordinates.longitude;
-      console.log('lat long: ' + ll);
+      // let ll = '52.510411, 13.457715'; // TEST -- Berlin
+      console.log('lat long: ' + ll); // TEST
       $('#ll').val(ll);
       getRestaurants(form);
     };
@@ -29,7 +30,6 @@ $(document).ready(function() {
   });
 });
 
-// let location = '52.510411, 13.457715';
 let getRestaurants = (form, ll) => {
   $.ajax({
     method: 'POST',
@@ -38,7 +38,7 @@ let getRestaurants = (form, ll) => {
   }).done( (response) => {
     let sortedRestaurants = response;
     if (sortedRestaurants.length == 0) {
-      alert('Sorry, we didn\'t find any vegan restaurants near you.');
+      $('#no-results-alert').addClass( 'show' );
     } else {
       // Print each restaurant
       for (let restaurant of sortedRestaurants) {
@@ -50,16 +50,3 @@ let getRestaurants = (form, ll) => {
     console.log(error);
   });
 };
-
-//
-// let options = {
-//   enableHighAccuracy: true,
-//   timeout: 5000,
-//   maximumAge: 0,
-// };
-
-
-// function error(err) {
-//   // console.warn(`ERROR(${err.code}): ${err.message}`);
-//   console.log('Error ' + err);
-// }
