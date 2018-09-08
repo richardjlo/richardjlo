@@ -1,12 +1,28 @@
 $(document).ready(function() {
   let form = $('#restaurantsForm');
   form.submit( (e) => {
-    navigator.geolocation.getCurrentPosition(function(pos) {
+    let success = (pos) => {
       let coordinates = pos.coords;
       let ll = coordinates.latitude + ', ' + coordinates.longitude;
+      console.log('lat long: ' + ll);
       $('#ll').val(ll);
       getRestaurants(form);
-    }, error, options);
+    };
+
+    let error = (err) => {
+      console.log('Error code: ' + err.code + ' (' + err.message + ')');
+      if (err.code == 1) {
+        alert('Please allow your browser to access your location.');
+      }
+    };
+
+    let options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
 
     // Stop browser from submitting form
     e.preventDefault();
@@ -35,15 +51,15 @@ let getRestaurants = (form, ll) => {
   });
 };
 
+//
+// let options = {
+//   enableHighAccuracy: true,
+//   timeout: 5000,
+//   maximumAge: 0,
+// };
 
-let options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
 
-
-function error(err) {
-  // console.warn(`ERROR(${err.code}): ${err.message}`);
-  console.log('Error ' + err);
-}
+// function error(err) {
+//   // console.warn(`ERROR(${err.code}): ${err.message}`);
+//   console.log('Error ' + err);
+// }
