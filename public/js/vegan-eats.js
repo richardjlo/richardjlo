@@ -41,10 +41,15 @@ let getRestaurants = (form, ll) => {
       showAlert('alert-warning',
         'Sorry, we didn\'t find any restaurants near you.');
     } else {
+      $('#restaurants-table').removeClass( 'd-none');
       // Print each restaurant
       for (let restaurant of sortedRestaurants) {
-        $('.restaurants-list').append(
-          '<li class="list-group-item"><a href="' + restaurant.url + '"' + ' target="_blank">' + restaurant.name + ' ' + restaurant.rating + '</a></li>');
+        $('#restaurants').append(
+          '<tr>' +
+            '<th scope="row">' + restaurant.rating + '</th>' +
+            '<td><a href="' + restaurant.url + ' " target="_blank">' + restaurant.name + '</a></td>' +
+          '</tr>'
+        );
       }
     }
   }).fail( (error) => {
