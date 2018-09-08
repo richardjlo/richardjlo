@@ -5,7 +5,7 @@ $(document).ready(function() {
       let coordinates = pos.coords;
       let ll = coordinates.latitude + ', ' + coordinates.longitude;
       // let ll = '52.510411, 13.457715'; // TEST -- Berlin
-      console.log('lat long: ' + ll); // TEST
+      // console.log('lat long: ' + ll); // TEST
       $('#ll').val(ll);
       getRestaurants(form);
     };
@@ -13,7 +13,8 @@ $(document).ready(function() {
     let error = (err) => {
       console.log('Error code: ' + err.code + ' (' + err.message + ')');
       if (err.code == 1) {
-        alert('Please allow your browser to access your location.');
+        showAlert('alert-danger',
+          'Please allow your browser to access your location.');
       }
     };
 
@@ -38,7 +39,8 @@ let getRestaurants = (form, ll) => {
   }).done( (response) => {
     let sortedRestaurants = response;
     if (sortedRestaurants.length == 0) {
-      $('#no-results-alert').addClass( 'show' );
+      showAlert('alert-warning',
+        'Sorry, we didn\'t find any restaurants near you.');
     } else {
       // Print each restaurant
       for (let restaurant of sortedRestaurants) {
@@ -49,4 +51,9 @@ let getRestaurants = (form, ll) => {
   }).fail( (error) => {
     console.log(error);
   });
+};
+
+let showAlert = (alertType, msg) => {
+  $('#no-results-alert').addClass( alertType + ' show' );
+  $('#alert-text').html(msg);
 };
