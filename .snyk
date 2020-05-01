@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:bootstrap:20180529':
@@ -14,4 +14,30 @@ ignore:
     - heroku > @heroku-cli/plugin-apps > term-img > iterm2-version > plist:
         reason: nothing to do for now
         expires: '2018-07-13T22:11:37.163Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - heroku > cli-ux > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @oclif/plugin-update > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - request-promise > request-promise-core > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @oclif/plugin-which > cli-ux > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @heroku-cli/plugin-webhooks-v5 > heroku-cli-util > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @heroku-cli/plugin-pipelines-v5 > inquirer > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @heroku-cli/plugin-config > edit-string > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @heroku-cli/plugin-pg-v5 > @heroku-cli/plugin-addons > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @oclif/plugin-legacy > @heroku-cli/command > cli-ux > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @heroku-cli/plugin-pg-v5 > @heroku-cli/plugin-addons > heroku-cli-util > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @heroku-cli/plugin-ci-v5 > @heroku-cli/plugin-pipelines > inquirer > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
+    - heroku > @heroku-cli/plugin-ci-v5 > @heroku-cli/plugin-run-v5 > @heroku-cli/command > cli-ux > lodash:
+        patched: '2020-05-01T00:18:52.980Z'
